@@ -81,11 +81,11 @@
     </dependencies>
 
     <build>
-        <sourceDirectory>apps/main/java</sourceDirectory>
-        <testSourceDirectory>apps/test/java</testSourceDirectory>
+        <sourceDirectory>src/backend/main/java</sourceDirectory>
+        <testSourceDirectory>src/backend/test/java</testSourceDirectory>
         <resources>
             <resource>
-                <directory>apps/main/resources</directory>
+                <directory>src/backend/main/resources</directory>
             </resource>
         </resources>
         <plugins>
