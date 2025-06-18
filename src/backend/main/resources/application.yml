@@ -2,7 +2,12 @@ spring:
   application:
     name: izertis-tech-test-elliot
 
-tmdb:
-  base-url: https://api.themoviedb.org/3
-  api-key: "${TMDB_API_KEY}"
-  language: es-ES
+movies:
+  provider: tmdb
+  tmdb:
+    base-url: https://api.themoviedb.org/3
+    api-key: "${TMDB_API_KEY}"
+    language: es-ES
+  omdb:
+    base-url: http://www.omdbapi.com/
+    api-key: "${OMDB_API_KEY}"
