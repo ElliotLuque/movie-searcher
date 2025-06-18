@@ -8,7 +8,7 @@ import org.mapstruct.Named;
 
 @Mapper(componentModel = "spring")
 public interface OmdbPageMapper {
-    int PAGE_SIZE = 10;
+    int PAGE_SIZE = 10; // OMDB api doesn't let you change page size
 
     @Mapping(target = "page",          source = "currentPage")
     @Mapping(target = "totalElements",  source = "resp.totalResults", qualifiedByName = "parseLong")
