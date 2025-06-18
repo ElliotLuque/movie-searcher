@@ -1,4 +1,4 @@
-package com.izertis.techtestelliot.adapters.out.omdb;
+package com.izertis.techtestelliot.adapters.out.omdb.mapper;
 
 import com.izertis.techtestelliot.adapters.out.omdb.dto.OmdbMovieDetailResponse;
 import com.izertis.techtestelliot.domain.model.Movie;
