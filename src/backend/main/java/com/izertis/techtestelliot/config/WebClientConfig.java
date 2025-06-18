@@ -1,5 +1,6 @@
 package com.izertis.techtestelliot.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -14,37 +15,42 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 
+@Slf4j
 @Configuration
 public class WebClientConfig {
 
-    @Bean("movieWebClient")
+    @Bean("tmdbWebClient")
     @ConditionalOnProperty(name = "movies.provider",
             havingValue = "tmdb",
             matchIfMissing = true
     )
     public WebClient tmdbWebClient(
-            @Value("${tmdb.base-url") String baseUrl,
-            @Value("${tmdb.api-key") String apiKey
+            @Value("${movies.tmdb.base-url}") String baseUrl,
+            @Value("${movies.tmdb.api-key}") String apiKey
     ) {
         return WebClient.builder()
                 .baseUrl(baseUrl)
                 .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey)
+                .defaultHeader(HttpHeaders.ACCEPT, "application/json")
                 .filter(ExchangeFilterFunctions.statusError(HttpStatusCode::isError,
                         r -> new RuntimeException("Error al llamar a la API de TMDB"))
                 )
                 .build();
     }
 
-    @Bean("movieWebClient")
+    @Bean("omdbWebClient")
     @ConditionalOnProperty(name = "movies.provider",
             havingValue = "omdb"
     )
-    public WebClient omdbWebClient(@Value("${omdb.base-url") String baseUrl,
-                                   @Value("${omdb.api-key") String apiKey
+    public WebClient omdbWebClient(@Value("${movies.omdb.base-url}") String baseUrl,
+                                   @Value("${movies.omdb.api-key}") String apiKey
     ) {
         ExchangeFilterFunction apikeyFilter =
                 (request, next) -> {
                     URI original = request.url();
+                    if (original.getQuery() != null && original.getQuery().contains("apikey=")) {
+                        return next.exchange(request);
+                    }
 
                     URI withKey = UriComponentsBuilder.fromUri(original)
                             .queryParam("apikey", apiKey)

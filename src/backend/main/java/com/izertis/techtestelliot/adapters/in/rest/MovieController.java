@@ -1,7 +1,10 @@
 package com.izertis.techtestelliot.adapters.in.rest;
 
+import com.izertis.techtestelliot.adapters.in.rest.dto.MovieDetailResponse;
+import com.izertis.techtestelliot.adapters.in.rest.dto.MoviePageResponse;
+import com.izertis.techtestelliot.adapters.in.rest.mapper.MovieMapper;
 import com.izertis.techtestelliot.application.port.in.QueryMovieUseCase;
-import com.izertis.techtestelliot.domain.model.Movie;
+import com.izertis.techtestelliot.domain.model.MoviePage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,22 +12,39 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/movies")
 public class MovieController {
-    private final QueryMovieUseCase queryMovieUseCase;
+    private final QueryMovieUseCase useCase;
+    private final MovieMapper mapper;
 
     @GetMapping
-    public ResponseEntity<List<Movie>> searchByTitle(@RequestParam String title) {
-        return ResponseEntity.ok(queryMovieUseCase.searchByTitle(title));
+    public Mono<MoviePageResponse> searchByTitle(
+            @RequestParam String title,
+            @RequestParam(defaultValue = "1") int page) {
+        return useCase.searchByTitle(title, page)
+                .map(this::toResponse);
     }
 
-    //@GetMapping("/{id}")
-    //public ResponseEntity<Movie> findByImdbId(@PathVariable String id) {
-//
-   //  }
+    @GetMapping("/{imdbId}")
+    public Mono<ResponseEntity<MovieDetailResponse>> findByImdbId(@PathVariable String imdbId) {
+        return useCase.findByImdbId(imdbId)
+                .map(mapper::toDetail)
+                .map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.notFound().build());
+     }
+
+     // Helpers
+    private MoviePageResponse toResponse(MoviePage page) {
+        return new MoviePageResponse(
+                page.page(),
+                page.totalPages(),
+                page.totalElements(),
+                page.results().stream()
+                        .map(mapper::toPageItem)
+                        .toList());
+    }
 }

@@ -1,16 +1,16 @@
-package com.izertis.techtestelliot.domain.model;
+package com.izertis.techtestelliot.adapters.in.rest.dto;
 
 import java.util.List;
 
-public record Movie(
+public record MovieDetailResponse(
         String imdbId,
         String title,
         int year,
-        double rating,
         String director,
+        double rating,
         String plot,
+        List<String> genres,
         String language,
-        int runtime,
-        List<String> genres
+        int runtime
 ) {
 }
