@@ -23,9 +23,9 @@ public class MovieController {
 
     @GetMapping
     public Mono<MoviePageResponse> searchByTitle(
-            @RequestParam String title,
+            @RequestParam String query,
             @RequestParam(defaultValue = "1") int page) {
-        return useCase.searchByTitle(title, page)
+        return useCase.searchByTitle(query, page)
                 .map(this::toResponse);
     }
 
