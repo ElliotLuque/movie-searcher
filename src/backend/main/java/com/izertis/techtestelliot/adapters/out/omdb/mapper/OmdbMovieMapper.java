@@ -13,7 +13,8 @@ import java.util.List;
 public interface OmdbMovieMapper {
 
    @Mapping(target = "genres", source = "genre", qualifiedByName = "parseGenres")
-   @Mapping(target = "runtime", source = "genre", qualifiedByName = "parseRuntime")
+   @Mapping(target = "runtime", source = "runtime", qualifiedByName = "parseRuntime")
+   @Mapping(target = "rating", source = "imdbRating")
    Movie toDomain(OmdbMovieDetailResponse resp);
 
    // Helpers
