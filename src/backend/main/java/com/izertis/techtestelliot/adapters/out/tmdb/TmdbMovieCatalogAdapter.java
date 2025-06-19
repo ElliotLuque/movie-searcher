@@ -46,9 +46,7 @@ public class TmdbMovieCatalogAdapter implements MovieCatalog {
                     return Flux.fromIterable(searchResponse.results())
                             .flatMap(movieResult ->
                                     getMovieFromTmdbId(movieResult.id())
-                                            .onErrorResume(e -> {
-                                                return Mono.empty();
-                                            })
+                                            .onErrorResume(e -> Mono.empty())
                             )
                             .filter(movie -> movie.imdbId() != null)
                             .collectList()

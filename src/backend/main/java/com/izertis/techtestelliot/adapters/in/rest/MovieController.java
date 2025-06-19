@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
-
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 @RestController
@@ -31,26 +29,22 @@ public class MovieController {
             @RequestParam(defaultValue = "1") int page) {
         return useCase.searchByTitle(query, page)
                 .map(this::toResponse)
-                .map(response -> {
-                    return ResponseEntity.ok()
-                            .cacheControl(CacheControl.maxAge(30, TimeUnit.MINUTES)
-                                    .cachePublic())
-                            .header("Vary", "Accept-Encoding")
-                            .body(response);
-                });
+                .map(response -> ResponseEntity.ok()
+                        .cacheControl(CacheControl.maxAge(30, TimeUnit.MINUTES)
+                                .cachePublic())
+                        .header("Vary", "Accept-Encoding")
+                        .body(response));
     }
 
     @GetMapping("/{imdbId}")
     public Mono<ResponseEntity<MovieDetailResponse>> findByImdbId(@PathVariable String imdbId) {
         return useCase.findByImdbId(imdbId)
                 .map(mapper::toDetail)
-                .map(movie -> {
-                    return ResponseEntity.ok()
-                            .cacheControl(CacheControl.maxAge(1, TimeUnit.HOURS)
-                                    .cachePublic())
-                            .header("Vary", "Accept-Encoding")
-                            .body(movie);
-                })
+                .map(movie -> ResponseEntity.ok()
+                        .cacheControl(CacheControl.maxAge(1, TimeUnit.HOURS)
+                                .cachePublic())
+                        .header("Vary", "Accept-Encoding")
+                        .body(movie))
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
     // Helpers
