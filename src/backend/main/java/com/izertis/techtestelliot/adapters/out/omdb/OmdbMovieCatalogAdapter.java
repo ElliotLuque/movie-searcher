@@ -1,9 +1,9 @@
 package com.izertis.techtestelliot.adapters.out.omdb;
 
-import com.izertis.techtestelliot.adapters.out.omdb.dto.OmdbMovieDetailResponse;
-import com.izertis.techtestelliot.adapters.out.omdb.dto.OmdbMovieSearchResponse;
+import com.izertis.techtestelliot.adapters.out.omdb.dto.find.OmdbMovieDetailResponse;
+import com.izertis.techtestelliot.adapters.out.omdb.dto.search.OmdbMovieSearchResponse;
 import com.izertis.techtestelliot.adapters.out.omdb.mapper.OmdbMovieMapper;
-import com.izertis.techtestelliot.adapters.out.omdb.mapper.OmdbPageMapper;
+import com.izertis.techtestelliot.adapters.out.omdb.mapper.OmdbMoviePageMapper;
 import com.izertis.techtestelliot.application.port.out.MovieCatalog;
 import com.izertis.techtestelliot.domain.model.Movie;
 import com.izertis.techtestelliot.domain.model.MoviePage;
@@ -20,7 +20,7 @@ import reactor.core.publisher.Mono;
 public class OmdbMovieCatalogAdapter implements MovieCatalog {
     private final @Qualifier("omdbWebClient") WebClient client;
     private final OmdbMovieMapper movieMapper;
-    private final OmdbPageMapper pageMapper;
+    private final OmdbMoviePageMapper pageMapper;
 
     @Override
     public Mono<MoviePage> searchByTitle(String title, int page) {

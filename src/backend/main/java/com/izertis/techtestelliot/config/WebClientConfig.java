@@ -16,7 +16,6 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 
-@Slf4j
 @Configuration
 public class WebClientConfig {
 
@@ -34,7 +33,7 @@ public class WebClientConfig {
                 .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey)
                 .defaultHeader(HttpHeaders.ACCEPT, "application/json")
                 .filter(ExchangeFilterFunctions.statusError(HttpStatusCode::isError,
-                        r -> new RuntimeException("Error al llamar a la API de TMDB"))
+                        r -> new RuntimeException("Error calling TMDB API"))
                 )
                 .build();
     }
@@ -70,7 +69,7 @@ public class WebClientConfig {
                 .defaultHeader(HttpHeaders.ACCEPT, "application/json")
                 .filter(apikeyFilter)
                 .filter(ExchangeFilterFunctions.statusError(HttpStatusCode::isError,
-                        r -> new RuntimeException("Error al llamar a la API de OMDB"))
+                        r -> new RuntimeException("Error calling OMDB API"))
                 )
                 .build();
     }

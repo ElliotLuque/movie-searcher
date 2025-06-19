@@ -1,12 +1,12 @@
-package com.izertis.techtestelliot.adapters.out.omdb.dto;
+package com.izertis.techtestelliot.adapters.out.omdb.dto.find;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record OmdbMovieDetailResponse(
         @JsonProperty("imdbID") String imdbId,
-        @JsonProperty("imdbRating") String imdbRating,
+        @JsonProperty("imdbRating") double imdbRating,
         @JsonProperty("Title") String title,
-        @JsonProperty("Year") String year,
+        @JsonProperty("Year") int year,
         @JsonProperty("Director") String director,
         @JsonProperty("Plot") String plot,
         @JsonProperty("Genre") String genre,

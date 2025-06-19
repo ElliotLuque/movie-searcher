@@ -1,13 +1,13 @@
 package com.izertis.techtestelliot.adapters.out.omdb.mapper;
 
-import com.izertis.techtestelliot.adapters.out.omdb.dto.OmdbMovieSearchResponse;
+import com.izertis.techtestelliot.adapters.out.omdb.dto.search.OmdbMovieSearchResponse;
 import com.izertis.techtestelliot.domain.model.MoviePage;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
 @Mapper(componentModel = "spring")
-public interface OmdbPageMapper {
+public interface OmdbMoviePageMapper {
     int PAGE_SIZE = 10; // OMDB api doesn't let you change page size
 
     @Mapping(target = "page",          source = "currentPage")

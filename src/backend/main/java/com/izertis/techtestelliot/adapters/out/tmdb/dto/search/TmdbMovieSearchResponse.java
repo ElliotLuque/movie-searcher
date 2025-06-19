@@ -1,4 +1,4 @@
-package com.izertis.techtestelliot.adapters.out.tmdb.dto;
+package com.izertis.techtestelliot.adapters.out.tmdb.dto.search;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

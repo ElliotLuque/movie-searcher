@@ -1,11 +1,11 @@
 package com.izertis.techtestelliot.adapters.out.tmdb;
 
-import com.izertis.techtestelliot.adapters.out.tmdb.dto.TmdbMovieSearchResponse;
+import com.izertis.techtestelliot.adapters.out.tmdb.dto.search.TmdbMovieSearchResponse;
 import com.izertis.techtestelliot.adapters.out.tmdb.dto.find.TmdbMovieDetailResponse;
 import com.izertis.techtestelliot.adapters.out.tmdb.dto.find.TmdbMovieFindResponse;
 import com.izertis.techtestelliot.adapters.out.tmdb.mapper.TmdbMovieDetailMapper;
 import com.izertis.techtestelliot.adapters.out.tmdb.mapper.TmdbMovieMapper;
-import com.izertis.techtestelliot.adapters.out.tmdb.mapper.TmdbPageMapper;
+import com.izertis.techtestelliot.adapters.out.tmdb.mapper.TmdbMoviePageMapper;
 import com.izertis.techtestelliot.application.port.out.MovieCatalog;
 import com.izertis.techtestelliot.domain.model.Movie;
 import com.izertis.techtestelliot.domain.model.MoviePage;
@@ -21,7 +21,7 @@ import reactor.core.publisher.Mono;
 @ConditionalOnProperty(name = "movies.provider", havingValue = "tmdb", matchIfMissing = true)
 public class TmdbMovieCatalogAdapter implements MovieCatalog {
     private final @Qualifier("tmdbWebClient") WebClient client;
-    private final TmdbPageMapper pageMapper;
+    private final TmdbMoviePageMapper pageMapper;
     private final TmdbMovieMapper movieMapper;
     private final TmdbMovieDetailMapper movieDetailMapper;
 
