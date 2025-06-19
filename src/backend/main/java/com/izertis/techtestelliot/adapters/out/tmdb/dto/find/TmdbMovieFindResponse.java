@@ -8,6 +8,6 @@ public record TmdbMovieFindResponse(
         @JsonProperty("movie_results") List<TmdbMovieFindItemResponse> movieResults
 ) {
     public record  TmdbMovieFindItemResponse(
-            @JsonProperty("id") long id
+            @JsonProperty("id") int id
     ) {}
 }

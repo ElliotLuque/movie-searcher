@@ -3,7 +3,6 @@ package com.izertis.techtestelliot.adapters.out.tmdb;
 import com.izertis.techtestelliot.adapters.out.tmdb.dto.search.TmdbMovieSearchResponse;
 import com.izertis.techtestelliot.adapters.out.tmdb.dto.find.TmdbMovieDetailResponse;
 import com.izertis.techtestelliot.adapters.out.tmdb.dto.find.TmdbMovieFindResponse;
-import com.izertis.techtestelliot.adapters.out.tmdb.mapper.TmdbMovieDetailMapper;
 import com.izertis.techtestelliot.adapters.out.tmdb.mapper.TmdbMovieMapper;
 import com.izertis.techtestelliot.adapters.out.tmdb.mapper.TmdbMoviePageMapper;
 import com.izertis.techtestelliot.application.port.out.MovieCatalog;
@@ -14,7 +13,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -23,7 +24,6 @@ public class TmdbMovieCatalogAdapter implements MovieCatalog {
     private final @Qualifier("tmdbWebClient") WebClient client;
     private final TmdbMoviePageMapper pageMapper;
     private final TmdbMovieMapper movieMapper;
-    private final TmdbMovieDetailMapper movieDetailMapper;
 
     @Override
     public Mono<MoviePage> searchByTitle(String title, int page) {
@@ -31,11 +31,27 @@ public class TmdbMovieCatalogAdapter implements MovieCatalog {
                 .uri(uriBuilder -> uriBuilder
                         .path("/search/movie")
                         .queryParam("query", title)
+                        .queryParam("page", page)
                         .build()
                 )
                 .retrieve()
                 .bodyToMono(TmdbMovieSearchResponse.class)
-                .map(resp -> pageMapper.toDomain(resp, page));
+                .flatMap(searchResponse -> {
+                    if (searchResponse.results().isEmpty()) {
+                        return Mono.just(pageMapper.toDomain(searchResponse, List.of()));
+                    }
+
+                    return Flux.fromIterable(searchResponse.results())
+                            .flatMap(movieResult ->
+                                    getMovieFromTmdbId(movieResult.id())
+                                            .onErrorResume(e -> {
+                                                return Mono.empty();
+                                            })
+                            )
+                            .filter(movie -> movie.imdbId() != null)
+                            .collectList()
+                            .map(movies -> pageMapper.toDomain(searchResponse, movies));
+                });
     }
 
     @Override
@@ -51,7 +67,16 @@ public class TmdbMovieCatalogAdapter implements MovieCatalog {
                                 .uri("/movie/{id}?append_to_response=credits", tmdbDto.id())
                                 .retrieve()
                                 .bodyToMono(TmdbMovieDetailResponse.class)
-                                .map(movieDetailMapper::toDomain)
+                                .map(movieMapper::toDomain)
                 );
+    }
+
+    // Helpers
+    private Mono<Movie> getMovieFromTmdbId(int tmdbId) {
+        return client.get()
+                .uri("/movie/{id}?append_to_response=external_ids", tmdbId)
+                .retrieve()
+                .bodyToMono(TmdbMovieDetailResponse.class)
+                .map(movieMapper::toDomain);
     }
 }

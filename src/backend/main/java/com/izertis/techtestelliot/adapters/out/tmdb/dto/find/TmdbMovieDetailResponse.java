@@ -13,10 +13,15 @@ public record TmdbMovieDetailResponse(
         @JsonProperty("runtime") int runtime,
         @JsonProperty("genres") List<Genre> genres,
         @JsonProperty("original_language") String originalLanguage,
-        @JsonProperty("credits") Credits credits
+        @JsonProperty("credits") Credits credits,
+        @JsonProperty("external_ids") ExternalIds externalIds
 ) {
+    public record ExternalIds (
+            @JsonProperty("imdb_id") String imdbId
+    ) {}
+
     public record Genre(
-      long id,
+      int id,
       String name
     ){}
 
