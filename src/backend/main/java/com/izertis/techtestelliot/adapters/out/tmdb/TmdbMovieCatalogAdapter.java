@@ -11,6 +11,7 @@ import com.izertis.techtestelliot.domain.model.MoviePage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -26,6 +27,7 @@ public class TmdbMovieCatalogAdapter implements MovieCatalog {
     private final TmdbMovieMapper movieMapper;
 
     @Override
+    @Cacheable(value = "moviesByTitle", key = "#title + '-' + #page")
     public Mono<MoviePage> searchByTitle(String title, int page) {
         return client.get()
                 .uri(uriBuilder -> uriBuilder
@@ -55,6 +57,7 @@ public class TmdbMovieCatalogAdapter implements MovieCatalog {
     }
 
     @Override
+    @Cacheable(value = "moviesById", key = "#imdbId")
     public Mono<Movie> findByImdbId(String imdbId) {
         return client.get()
                 .uri("/find/{id}?external_source=imdb_id", imdbId)
