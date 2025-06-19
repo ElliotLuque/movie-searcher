@@ -1,0 +1,31 @@
+package com.izertis.techtestelliot.adapters.out.tmdb.dto.find;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
+
+public record TmdbMovieDetailResponse(
+        @JsonProperty("imdb_id") String imdbId,
+        @JsonProperty("title") String title,
+        @JsonProperty("release_date") String releaseDate,
+        @JsonProperty("vote_average") double voteAverage,
+        @JsonProperty("overview") String overview,
+        @JsonProperty("runtime") int runtime,
+        @JsonProperty("genres") List<Genre> genres,
+        @JsonProperty("original_language") String originalLanguage,
+        @JsonProperty("credits") Credits credits
+) {
+    public record Genre(
+      long id,
+      String name
+    ){}
+
+    public record Credits(
+            List<CrewMember> crew
+    ) {
+        public record CrewMember(
+                String job,
+                String name
+        ) {}
+    }
+}

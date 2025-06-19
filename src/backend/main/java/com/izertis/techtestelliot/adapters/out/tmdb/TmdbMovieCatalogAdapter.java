@@ -1,5 +1,8 @@
 package com.izertis.techtestelliot.adapters.out.tmdb;
 
+import com.izertis.techtestelliot.adapters.out.tmdb.dto.TmdbMovieSearchResponse;
+import com.izertis.techtestelliot.adapters.out.tmdb.dto.find.TmdbMovieDetailResponse;
+import com.izertis.techtestelliot.adapters.out.tmdb.dto.find.TmdbMovieFindResponse;
 import com.izertis.techtestelliot.adapters.out.tmdb.mapper.TmdbMovieDetailMapper;
 import com.izertis.techtestelliot.adapters.out.tmdb.mapper.TmdbMovieMapper;
 import com.izertis.techtestelliot.adapters.out.tmdb.mapper.TmdbPageMapper;
@@ -37,6 +40,18 @@ public class TmdbMovieCatalogAdapter implements MovieCatalog {
 
     @Override
     public Mono<Movie> findByImdbId(String imdbId) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return client.get()
+                .uri("/find/{id}?external_source=imdb_id", imdbId)
+                .retrieve()
+                .bodyToMono(TmdbMovieFindResponse.class)
+                .flatMap(resp -> resp.movieResults().stream().findFirst()
+                        .map(Mono::just).orElseGet(Mono::empty))
+                .flatMap(tmdbDto ->
+                        client.get()
+                                .uri("/movie/{id}?append_to_response=credits", tmdbDto.id())
+                                .retrieve()
+                                .bodyToMono(TmdbMovieDetailResponse.class)
+                                .map(movieDetailMapper::toDomain)
+                );
     }
 }
