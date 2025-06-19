@@ -23,7 +23,7 @@ public class OmdbMovieCatalogAdapter implements MovieCatalog {
     private final OmdbPageMapper pageMapper;
 
     @Override
-    public Mono<MoviePage> findByTitle(String title, int page) {
+    public Mono<MoviePage> searchByTitle(String title, int page) {
         return client.get()
                 .uri(uriBuilder -> uriBuilder
                         .queryParam("s", title)

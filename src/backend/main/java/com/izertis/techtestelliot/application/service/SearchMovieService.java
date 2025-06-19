@@ -15,7 +15,7 @@ public class SearchMovieService implements QueryMovieUseCase {
 
     @Override
     public Mono<MoviePage> searchByTitle(String title, int page) {
-        return movieCatalog.findByTitle(title, page);
+        return movieCatalog.searchByTitle(title, page);
     }
 
     @Override

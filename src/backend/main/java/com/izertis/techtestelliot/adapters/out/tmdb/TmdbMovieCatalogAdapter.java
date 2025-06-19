@@ -26,7 +26,7 @@ public class TmdbMovieCatalogAdapter implements MovieCatalog {
     private final TmdbMovieDetailMapper movieDetailMapper;
 
     @Override
-    public Mono<MoviePage> findByTitle(String title, int page) {
+    public Mono<MoviePage> searchByTitle(String title, int page) {
         return client.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/search/movie")
