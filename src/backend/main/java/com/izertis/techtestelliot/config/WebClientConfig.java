@@ -19,8 +19,7 @@ public class WebClientConfig {
 
     @Bean("tmdbWebClient")
     @ConditionalOnProperty(name = "movies.provider",
-            havingValue = "tmdb",
-            matchIfMissing = true
+            havingValue = "tmdb"
     )
     public WebClient tmdbWebClient(
             @Value("${movies.tmdb.base-url}") String baseUrl,
@@ -38,7 +37,8 @@ public class WebClientConfig {
 
     @Bean("omdbWebClient")
     @ConditionalOnProperty(name = "movies.provider",
-            havingValue = "omdb"
+            havingValue = "omdb",
+            matchIfMissing = true
     )
     public WebClient omdbWebClient(@Value("${movies.omdb.base-url}") String baseUrl,
                                    @Value("${movies.omdb.api-key}") String apiKey

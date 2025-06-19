@@ -20,7 +20,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-@ConditionalOnProperty(name = "movies.provider", havingValue = "tmdb", matchIfMissing = true)
+@ConditionalOnProperty(name = "movies.provider", havingValue = "tmdb")
 public class TmdbMovieCatalogAdapter implements MovieCatalog {
     private final @Qualifier("tmdbWebClient") WebClient client;
     private final TmdbMoviePageMapper pageMapper;

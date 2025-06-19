@@ -17,7 +17,7 @@ import reactor.core.publisher.Mono;
 
 @Component
 @RequiredArgsConstructor
-@ConditionalOnProperty(name = "movies.provider", havingValue = "omdb")
+@ConditionalOnProperty(name = "movies.provider", havingValue = "omdb", matchIfMissing = true)
 public class OmdbMovieCatalogAdapter implements MovieCatalog {
     private final @Qualifier("omdbWebClient") WebClient client;
     private final OmdbMovieMapper movieMapper;
