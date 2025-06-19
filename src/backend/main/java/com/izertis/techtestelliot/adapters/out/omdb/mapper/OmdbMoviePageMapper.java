@@ -11,10 +11,10 @@ public interface OmdbMoviePageMapper {
     int PAGE_SIZE = 10; // OMDB api doesn't let you change page size
 
     @Mapping(target = "page",          source = "currentPage")
-    @Mapping(target = "totalElements",  source = "resp.totalResults", qualifiedByName = "parseLong")
-    @Mapping(target = "totalPages",     source = "resp.totalResults", qualifiedByName = "calcPages")
-    @Mapping(target = "results",       source = "resp.search")
-    MoviePage toDomain(OmdbMovieSearchResponse resp, int currentPage);
+    @Mapping(target = "totalElements",  source = "response.totalResults", qualifiedByName = "parseLong")
+    @Mapping(target = "totalPages",     source = "response.totalResults", qualifiedByName = "calcPages")
+    @Mapping(target = "results",       source = "response.search")
+    MoviePage toDomain(OmdbMovieSearchResponse response, int currentPage);
 
     // Helpers
     @Named("parseLong")
