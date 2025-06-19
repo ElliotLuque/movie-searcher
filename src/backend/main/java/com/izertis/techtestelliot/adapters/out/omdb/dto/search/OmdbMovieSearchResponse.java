@@ -6,7 +6,8 @@ import java.util.List;
 
 public record OmdbMovieSearchResponse(
         @JsonProperty("Search") List<OmdbMovieSearchItemDTO> search,
-        @JsonProperty("totalResults") String totalResults
+        @JsonProperty("totalResults") String totalResults,
+        @JsonProperty("Response") String response
 ) {
     public record OmdbMovieSearchItemDTO(
             @JsonProperty("imdbID") String imdbId,

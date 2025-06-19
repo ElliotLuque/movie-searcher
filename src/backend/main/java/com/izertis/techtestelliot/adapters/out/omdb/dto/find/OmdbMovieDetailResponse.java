@@ -11,6 +11,7 @@ public record OmdbMovieDetailResponse(
         @JsonProperty("Plot") String plot,
         @JsonProperty("Genre") String genre,
         @JsonProperty("Language") String language,
-        @JsonProperty("Runtime") String runtime
+        @JsonProperty("Runtime") String runtime,
+        @JsonProperty("Response") String response
 ) {
 }

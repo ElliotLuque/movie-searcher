@@ -6,6 +6,7 @@ import com.izertis.techtestelliot.adapters.out.tmdb.dto.find.TmdbMovieFindRespon
 import com.izertis.techtestelliot.adapters.out.tmdb.mapper.TmdbMovieMapper;
 import com.izertis.techtestelliot.adapters.out.tmdb.mapper.TmdbMoviePageMapper;
 import com.izertis.techtestelliot.application.port.out.MovieCatalog;
+import com.izertis.techtestelliot.domain.exception.MovieNotFoundException;
 import com.izertis.techtestelliot.domain.model.Movie;
 import com.izertis.techtestelliot.domain.model.MoviePage;
 import lombok.RequiredArgsConstructor;
@@ -62,7 +63,8 @@ public class TmdbMovieCatalogAdapter implements MovieCatalog {
                 .retrieve()
                 .bodyToMono(TmdbMovieFindResponse.class)
                 .flatMap(resp -> resp.movieResults().stream().findFirst()
-                        .map(Mono::just).orElseGet(Mono::empty))
+                        .map(Mono::just)
+                        .orElseGet(() -> Mono.error(new MovieNotFoundException(imdbId))))
                 .flatMap(tmdbDto ->
                         client.get()
                                 .uri("/movie/{id}?append_to_response=credits", tmdbDto.id())
