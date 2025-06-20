@@ -153,6 +153,6 @@ public class InMemoryMovieCatalogAdapter implements MovieCatalog {
                 "English",
                 127,
                 List.of("Action", "Adventure", "Sci-Fi")
-        ));    }
-
-    public void save(Movie movie) { store.put(movie.imdbId(), movie); }}
+        ));
+    }
+}
