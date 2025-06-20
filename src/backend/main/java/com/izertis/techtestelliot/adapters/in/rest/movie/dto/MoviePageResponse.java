@@ -1,4 +1,4 @@
-package com.izertis.techtestelliot.adapters.in.rest.dto;
+package com.izertis.techtestelliot.adapters.in.rest.movie.dto;
 
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;

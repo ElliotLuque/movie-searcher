@@ -1,8 +1,8 @@
-package com.izertis.techtestelliot.adapters.in.rest;
+package com.izertis.techtestelliot.adapters.in.rest.movie;
 
-import com.izertis.techtestelliot.adapters.in.rest.dto.MovieDetailResponse;
-import com.izertis.techtestelliot.adapters.in.rest.dto.MoviePageResponse;
-import com.izertis.techtestelliot.adapters.in.rest.mapper.MovieMapper;
+import com.izertis.techtestelliot.adapters.in.rest.movie.dto.MovieDetailResponse;
+import com.izertis.techtestelliot.adapters.in.rest.movie.dto.MoviePageResponse;
+import com.izertis.techtestelliot.adapters.in.rest.movie.mapper.MovieMapper;
 import com.izertis.techtestelliot.application.port.in.QueryMovieUseCase;
 import com.izertis.techtestelliot.domain.model.MoviePage;
 import lombok.RequiredArgsConstructor;

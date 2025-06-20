@@ -1,7 +1,7 @@
-package com.izertis.techtestelliot.adapters.in.rest.mapper;
+package com.izertis.techtestelliot.adapters.in.rest.movie.mapper;
 
-import com.izertis.techtestelliot.adapters.in.rest.dto.MovieDetailResponse;
-import com.izertis.techtestelliot.adapters.in.rest.dto.MoviePageItemDTO;
+import com.izertis.techtestelliot.adapters.in.rest.movie.dto.MovieDetailResponse;
+import com.izertis.techtestelliot.adapters.in.rest.movie.dto.MoviePageItemDTO;
 import com.izertis.techtestelliot.domain.model.Movie;
 import org.mapstruct.Mapper;
 

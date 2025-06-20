@@ -11,6 +11,10 @@ springdoc:
   swagger-ui:
     path: /docs
 
+jwt:
+  secret: ${JWT_AUTH_SECRET}
+  expiration: 60m
+
 movies:
   provider: omdb
   tmdb:

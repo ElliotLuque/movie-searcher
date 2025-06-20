@@ -1,4 +1,4 @@
-package com.izertis.techtestelliot.adapters.in.rest.dto;
+package com.izertis.techtestelliot.adapters.in.rest.movie.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
@@ -11,8 +11,7 @@ public record MovieDetailResponse(
         @Schema(example = "George Lucas") String director,
         @Schema(example = "8.6") double rating,
         @Schema(example = "The Imperial Forces, under orders from cruel Darth Vader...") String plot,
-        @Schema(type = "array", example = "Action, Adventure, Fantasy")
-        List<String> genres,
+        @Schema(type = "array", example = "Action, Adventure, Fantasy") List<String> genres,
         @Schema(example = "English") String language,
         @Schema(example = "121") int runtime
 ) {

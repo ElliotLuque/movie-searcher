@@ -1,7 +1,7 @@
-package com.izertis.techtestelliot.adapters.in.rest;
+package com.izertis.techtestelliot.adapters.in.rest.movie;
 
-import com.izertis.techtestelliot.adapters.in.rest.dto.MovieDetailResponse;
-import com.izertis.techtestelliot.adapters.in.rest.dto.MoviePageResponse;
+import com.izertis.techtestelliot.adapters.in.rest.movie.dto.MovieDetailResponse;
+import com.izertis.techtestelliot.adapters.in.rest.movie.dto.MoviePageResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
