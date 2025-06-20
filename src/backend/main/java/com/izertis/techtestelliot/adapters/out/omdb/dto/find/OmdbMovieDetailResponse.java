@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record OmdbMovieDetailResponse(
         @JsonProperty("imdbID") String imdbId,
-        @JsonProperty("imdbRating") double imdbRating,
+        @JsonProperty("imdbRating") String imdbRating,
         @JsonProperty("Title") String title,
         @JsonProperty("Year") int year,
         @JsonProperty("Director") String director,

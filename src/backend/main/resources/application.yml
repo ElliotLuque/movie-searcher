@@ -1,6 +1,9 @@
 spring:
   application:
     name: izertis-tech-test-elliot
+  webflux:
+    problemdetails:
+      enabled: true
 
 springdoc:
   api-docs:

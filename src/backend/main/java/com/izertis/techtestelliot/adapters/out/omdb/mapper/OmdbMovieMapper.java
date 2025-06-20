@@ -14,7 +14,7 @@ public interface OmdbMovieMapper {
 
    @Mapping(target = "genres", source = "genre", qualifiedByName = "parseGenres")
    @Mapping(target = "runtime", source = "runtime", qualifiedByName = "parseRuntime")
-   @Mapping(target = "rating", source = "imdbRating")
+   @Mapping(target = "rating", source = "imdbRating", qualifiedByName = "parseRating")
    Movie toDomain(OmdbMovieDetailResponse resp);
 
    // Helpers
@@ -25,6 +25,19 @@ public interface OmdbMovieMapper {
          return Integer.parseInt(split[0]);
       } catch (NumberFormatException e) {
          return 0;
+      }
+   }
+
+   @Named("parseRating")
+   default double parseRating(String rating) {
+      try {
+         if (rating == null || rating.equals("N/A")) {
+            return 0.0;
+         } else {
+            return Double.parseDouble(rating);
+         }
+      } catch (NumberFormatException e) {
+         return 0.0;
       }
    }
 
