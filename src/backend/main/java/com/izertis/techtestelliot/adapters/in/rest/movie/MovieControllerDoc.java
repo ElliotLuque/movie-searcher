@@ -20,6 +20,7 @@ import reactor.core.publisher.Mono;
 @Tag(name = "Movies", description = "Search and retrieve movie information")
 public interface MovieControllerDoc {
 
+    @SuppressWarnings("unused")
     @Operation(summary = "Search movies by title",
             description = "Returns a paginated list of movies whose titles match the given query.",
             responses = {
@@ -49,7 +50,26 @@ public interface MovieControllerDoc {
                                                     """
                                     )
                             )
+                    ),
+                    @ApiResponse(
+                    responseCode = "401",
+                    description = "Not Authorized",
+                    content = @Content(
+                            mediaType = "application/problem+json",
+                            schema = @Schema(implementation = ProblemDetail.class),
+                            examples  = @ExampleObject(
+                                    value = """
+                                                    {
+                                                        "type": "about:blank",
+                                                        "title": "Unauthorized",
+                                                        "status": "401",
+                                                        "detail": "Not Authenticated",
+                                                        "instance": "/api/v1/movies"
+                                                      }
+                                                    """
+                            )
                     )
+            )
             }
     )
     Mono<ResponseEntity<MoviePageResponse>> searchByTitle(
@@ -62,6 +82,7 @@ public interface MovieControllerDoc {
             int page
     );
 
+    @SuppressWarnings("unused")
     @Operation(summary = "Get movie details by IMDB ID",
             description = "Returns detailed information about the movie with the given IMDB ID.",
             responses = {
@@ -106,6 +127,25 @@ public interface MovieControllerDoc {
                                                         "status": 400,
                                                         "detail": "findByImdbId.imdbId: IMDB ID must start with tt followed by atleast 7 digits",
                                                         "instance": "/api/v1/movies/50"
+                                                      }
+                                                    """
+                                    )
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "Not Authorized",
+                            content = @Content(
+                                    mediaType = "application/problem+json",
+                                    schema = @Schema(implementation = ProblemDetail.class),
+                                    examples  = @ExampleObject(
+                                            value = """
+                                                    {
+                                                        "type": "about:blank",
+                                                        "title": "Unauthorized",
+                                                        "status": "401",
+                                                        "detail": "Not Authenticated",
+                                                        "instance": "/api/v1/movies"
                                                       }
                                                     """
                                     )

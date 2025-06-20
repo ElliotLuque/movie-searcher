@@ -26,6 +26,7 @@ public class MovieController implements MovieControllerDoc {
     private final QueryMovieUseCase useCase;
     private final MovieMapper mapper;
 
+    @Override
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Mono<ResponseEntity<MoviePageResponse>> searchByTitle(String query, int page) {
         return useCase.searchByTitle(query, page)

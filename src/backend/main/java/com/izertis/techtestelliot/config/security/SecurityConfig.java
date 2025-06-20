@@ -24,6 +24,11 @@ public class SecurityConfig {
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchanges -> exchanges
+                        .pathMatchers(
+                                "/swagger-ui/**",
+                                "/webjars/swagger-ui/**",
+                                "/v1/api-docs/**",
+                                "/docs").permitAll()
                         .pathMatchers(HttpMethod.POST, "/api/v1/auth/login").permitAll()
                         .anyExchange().authenticated())
                 .addFilterAt(jwtAuthFilter, SecurityWebFiltersOrder.AUTHENTICATION)

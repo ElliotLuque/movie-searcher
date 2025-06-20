@@ -7,9 +7,11 @@ spring:
 
 springdoc:
   api-docs:
-    path: /api-docs
+    path: /v1/api-docs
   swagger-ui:
     path: /docs
+    persist-authorization: true
+    with-credentials: true
 
 jwt:
   secret: ${JWT_AUTH_SECRET}
