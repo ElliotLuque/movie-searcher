@@ -46,7 +46,7 @@ public class TmdbMovieCatalogAdapter implements MovieCatalog {
 
                     return Flux.fromIterable(searchResponse.results())
                             .flatMap(movieResult ->
-                                    getMovieFromTmdbId(movieResult.id())
+                                    fetchMovieByTmdbId(movieResult.id())
                                             .onErrorResume(e -> Mono.empty())
                             )
                             .filter(movie -> movie.imdbId() != null)
@@ -75,7 +75,7 @@ public class TmdbMovieCatalogAdapter implements MovieCatalog {
     }
 
     // Helpers
-    private Mono<Movie> getMovieFromTmdbId(int tmdbId) {
+    private Mono<Movie> fetchMovieByTmdbId(int tmdbId) {
         return client.get()
                 .uri("/movie/{id}?append_to_response=external_ids", tmdbId)
                 .retrieve()
