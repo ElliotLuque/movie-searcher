@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.net.URI;
+
 @Component
 public class ProblemAuthenticationEntryPoint implements ServerAuthenticationEntryPoint {
 
@@ -24,6 +26,7 @@ public class ProblemAuthenticationEntryPoint implements ServerAuthenticationEntr
 
         ProblemDetail problem = ProblemDetail
                 .forStatusAndDetail(HttpStatus.UNAUTHORIZED, ex.getMessage());
+        problem.setInstance(URI.create(exchange.getRequest().getPath().value()));
 
         byte[] bytes;
         try {
