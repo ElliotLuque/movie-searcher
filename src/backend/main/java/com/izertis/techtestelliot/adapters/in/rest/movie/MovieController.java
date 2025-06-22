@@ -33,8 +33,10 @@ public class MovieController implements MovieControllerDoc {
                 .map(this::toResponse)
                 .map(response -> ResponseEntity.ok()
                         .cacheControl(CacheControl.maxAge(30, TimeUnit.MINUTES)
-                                .cachePublic())
-                        .header("Vary", "Accept-Encoding")
+                                .cachePrivate()
+                                .mustRevalidate()
+                        )
+                        .header("Vary", "Accept-Encoding", "Cookie")
                         .body(response));
     }
 
@@ -45,8 +47,10 @@ public class MovieController implements MovieControllerDoc {
                 .map(mapper::toDetail)
                 .map(movie -> ResponseEntity.ok()
                         .cacheControl(CacheControl.maxAge(1, TimeUnit.HOURS)
-                                .cachePublic())
-                        .header("Vary", "Accept-Encoding")
+                                .cachePrivate()
+                                .cachePublic()
+                        )
+                        .header("Vary", "Accept-Encoding", "Cookie")
                         .body(movie))
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
