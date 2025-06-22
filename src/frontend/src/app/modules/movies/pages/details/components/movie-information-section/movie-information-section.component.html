@@ -1,0 +1,9 @@
+<section class="rounded-lg border border-gray-200 shadow-xs">
+  <div class="p-6">
+    <h2 class="text-xl font-semibold mb-4">Movie information</h2>
+    <div class="flex flex-col gap-4">
+      <app-movie-information-detail [text]="movie()?.director" [label]="'Director:'" [icon]="User"></app-movie-information-detail>
+      <app-movie-information-detail [text]="movie()?.language" [label]="'Language:'" [icon]="Globe"></app-movie-information-detail>
+    </div>
+  </div>
+</section>

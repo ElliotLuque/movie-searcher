@@ -1,0 +1,38 @@
+<div class="bg-background min-h-screen">
+  <div class="container mx-auto px-8 py-16">
+    <div class="mb-6">
+      <a routerLink="/">
+        <button class="inline-flex items-center justify-center rounded-md text-sm font-medium gap-2 px-4 py-2 hover:bg-gray-100 transition-colors cursor-pointer">
+          <lucide-angular [img]="ArrowLeftIcon" class="h-4 w-4"></lucide-angular>
+          Return to list
+        </button>
+      </a>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-1">
+        @if(movie?.imageUrl) {
+          <img ngSrc="{{movie?.imageUrl}}" alt="{{movie?.title}}" class="rounded-lg shadow-sm" fill>
+        } @else {
+          <app-movie-missing-image></app-movie-missing-image>
+        }
+      </div>
+      <div class="lg:col-span-2 flex flex-col gap-6">
+        <div>
+          <h1 class="text-4xl font-bold mb-2">{{movie?.title}}</h1>
+          <div class="flex items-center gap-4 text-gray-500 mb-4">
+            <app-movie-attribute [text]="movie?.rating?.toString()" [icon]="Star" [iconColor]="'fill-yellow-400 text-yellow-400'"></app-movie-attribute>
+            <app-movie-attribute [text]="movie?.year?.toString()" [icon]="Calendar"></app-movie-attribute>
+            <app-movie-attribute [text]="movie?.runtime?.toString() + ' min'" [icon]="Clock"></app-movie-attribute>
+          </div>
+          <div class="flex flex-wrap gap-2 mb-2">
+            @for(genre of movie?.genres; track $index) {
+              <app-movie-genre [genre]="genre"></app-movie-genre>
+            }
+          </div>
+        </div>
+        <app-movie-plot [plot]="movie?.plot"></app-movie-plot>
+        <app-movie-information [movie]="movie"></app-movie-information>
+      </div>
+    </div>
+  </div>
+</div>
