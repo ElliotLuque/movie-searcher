@@ -1,14 +1,14 @@
 import { Component, inject } from '@angular/core';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {ArrowLeftIcon, Calendar, Clock, LucideAngularModule, Star} from 'lucide-angular';
 import {MovieApiService} from '../../../../core/services/movie-api.service';
 import {Movie} from '../../../../core/models/movie.model';
 import {MovieMissingImage} from '../../../../shared/components/movie-missing-image/movie-missing-image';
 import {NgOptimizedImage} from '@angular/common';
 import {MovieGenre} from '../../../../shared/components/movie-genre/movie-genre';
-import {MoviePlotSection} from './components/movie-plot-section/movie-plot-section.component';
-import {MovieInformationSection} from './components/movie-information-section/movie-information-section.component';
-import {MovieAttribute} from './components/movie-attribute/movie-attribute';
+import {MoviePlotSection} from '../components/movie-plot-section/movie-plot-section.component';
+import {MovieInformationSection} from '../components/movie-information-section/movie-information-section.component';
+import {MovieAttribute} from '../components/movie-attribute/movie-attribute';
 
 @Component({
   selector: 'app-movie-details',
@@ -33,6 +33,7 @@ export class MovieDetailsPage {
 
   private readonly api = inject(MovieApiService);
   private route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   movie?: Movie;
 
@@ -40,7 +41,12 @@ export class MovieDetailsPage {
     const imdbId = this.route.snapshot.paramMap.get('imdbId');
 
     if (imdbId) {
-      this.api.getMovie(imdbId).subscribe(movie => this.movie = movie);
+      this.api.getMovie(imdbId).subscribe({
+        next: (movie) => this.movie = movie,
+        error: (err) => {
+            this.router.navigate(['/not-found']);
+        }
+      });
     }
   }
 }

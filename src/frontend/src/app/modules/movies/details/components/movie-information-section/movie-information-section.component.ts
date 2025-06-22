@@ -1,5 +1,5 @@
 import {Component, input} from '@angular/core';
-import {Movie} from '../../../../../../core/models/movie.model';
+import {Movie} from '../../../../../core/models/movie.model';
 import {MovieInformationDetail} from '../movie-information-detail/movie-information-detail';
 import {User, Globe} from 'lucide-angular';
 

@@ -1,6 +1,6 @@
 <div class="bg-background min-h-screen">
   <div class="container mx-auto px-8 py-16">
-    <div class="mb-6">
+    <div class="mb-16">
       <a routerLink="/">
         <button class="inline-flex items-center justify-center rounded-md text-sm font-medium gap-2 px-4 py-2 hover:bg-gray-100 transition-colors cursor-pointer">
           <lucide-angular [img]="ArrowLeftIcon" class="h-4 w-4"></lucide-angular>
@@ -20,7 +20,11 @@
         <div>
           <h1 class="text-4xl font-bold mb-2">{{movie?.title}}</h1>
           <div class="flex items-center gap-4 text-gray-500 mb-4">
-            <app-movie-attribute [text]="movie?.rating?.toString()" [icon]="Star" [iconColor]="'fill-yellow-400 text-yellow-400'"></app-movie-attribute>
+            @if ((movie?.rating ?? 0) > 0) {
+              <app-movie-attribute [text]="movie?.rating?.toString()" [icon]="Star" [iconColor]="'fill-yellow-400 text-yellow-400'"></app-movie-attribute>
+            } @else {
+              <app-movie-attribute [text]="'N/A'" [icon]="Star" [iconColor]="'fill-gray-400 text-gray-400'"></app-movie-attribute>
+            }
             <app-movie-attribute [text]="movie?.year?.toString()" [icon]="Calendar"></app-movie-attribute>
             <app-movie-attribute [text]="movie?.runtime?.toString() + ' min'" [icon]="Clock"></app-movie-attribute>
           </div>
