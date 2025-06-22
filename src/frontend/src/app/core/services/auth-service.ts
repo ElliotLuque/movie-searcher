@@ -12,7 +12,10 @@ export class AuthService {
   constructor() { }
 
   login(): Observable<void> {
-    console.log('login');
     return this.http.post<void>(`${this.baseUrl}/login`, {});
+  }
+
+  checkStatus(): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}/status`);
   }
 }
