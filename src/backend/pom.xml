@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.izertis</groupId>
-    <artifactId>techtestelliot</artifactId>
+    <artifactId>backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>izertis-tech-test-elliot</name>
     <description>izertis-tech-test-elliot</description>
@@ -126,11 +126,11 @@
     </dependencies>
 
     <build>
-        <sourceDirectory>src/backend/main/java</sourceDirectory>
-        <testSourceDirectory>src/backend/test/java</testSourceDirectory>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
         <resources>
             <resource>
-                <directory>src/backend/main/resources</directory>
+                <directory>src/main/resources</directory>
             </resource>
         </resources>
         <plugins>
