@@ -3,12 +3,13 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {MoviePage} from '../models/movie-page.model';
 import {Movie} from '../models/movie.model';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieApiService {
-  private readonly baseUrl = 'http://localhost:8080/api/v1/movies';
+  private readonly baseUrl = environment.baseApiUrl + '/movies';
   private readonly http = inject(HttpClient)
 
   constructor() { }

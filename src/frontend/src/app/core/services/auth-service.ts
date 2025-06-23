@@ -1,12 +1,13 @@
 import {inject, Injectable, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {catchError, map, Observable, of} from 'rxjs';
+import {catchError, map, of} from 'rxjs';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly baseUrl = 'http://localhost:8080/api/v1/auth';
+  private readonly baseUrl = environment.baseApiUrl + '/auth';
   private readonly http = inject(HttpClient)
 
   readonly status = signal<boolean>(false);
