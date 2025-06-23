@@ -1,0 +1,15 @@
+<header class="flex flex-col sm:flex-row items-center justify-between mb-14 text-center sm:text-left">
+  <div class="flex items-center justify-center sm:justify-start gap-2 mb-4 sm:mb-0 ">
+    <lucide-angular [img]="Film" class="h-8 w-8 text-blue-600"></lucide-angular>
+    <h1 class="text-4xl font-bold text-gray-800">Movie Searcher</h1>
+  </div>
+  @if (isLoggedIn()) {
+    <button
+      (click)="logout.emit()"
+      class="inline-flex items-center justify-center border border-gray-200 rounded-md text-sm font-medium gap-2 px-4 py-2 hover:bg-gray-100 transition-colors cursor-pointer"
+    >
+      <lucide-angular [img]="LogOut" class="h-4 w-4"></lucide-angular>
+      Log out
+    </button>
+  }
+</header>

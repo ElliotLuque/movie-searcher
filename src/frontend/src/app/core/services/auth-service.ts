@@ -9,7 +9,7 @@ export class AuthService {
   private readonly baseUrl = 'http://localhost:8080/api/v1/auth';
   private readonly http = inject(HttpClient)
 
-  readonly status = signal<null | boolean>(null);
+  readonly status = signal<boolean>(false);
 
   constructor() {
     this.refreshStatus();

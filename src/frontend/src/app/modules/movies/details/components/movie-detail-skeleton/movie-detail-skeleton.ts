@@ -6,4 +6,4 @@ import { Component } from '@angular/core';
   templateUrl: './movie-detail-skeleton.html',
 })
 export class MovieDetailSkeleton {
-  }
+}

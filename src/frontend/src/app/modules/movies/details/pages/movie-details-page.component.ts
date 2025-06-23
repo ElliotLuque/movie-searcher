@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ArrowLeftIcon, Calendar, Clock, LucideAngularModule, Star} from 'lucide-angular';
 import {MovieApiService} from '../../../../core/services/movie-api.service';
 import {Movie} from '../../../../core/models/movie.model';
@@ -15,7 +15,6 @@ import {ImageFallback} from '../../../../core/directives/image-fallback';
 @Component({
   selector: 'app-movie-details',
   imports: [
-    RouterLink,
     LucideAngularModule,
     NgOptimizedImage,
     MovieGenre,

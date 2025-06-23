@@ -1,6 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {AuthService} from '../../../../core/services/auth-service';
-import {Film, LucideAngularModule, Search, LogOut} from 'lucide-angular';
 import {MovieListPlaceholderSearch} from '../components/movie-list-placeholder-search/movie-list-placeholder-search';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MovieListLogin} from '../components/movie-list-login/movie-list-login';
@@ -9,11 +8,13 @@ import {catchError, debounceTime, distinctUntilChanged, map, of, shareReplay, st
 import {MovieApiService} from '../../../../core/services/movie-api.service';
 import {AsyncPipe} from '@angular/common';
 import {MoviePage} from '../../../../core/models/movie-page.model';
-import {MovieListItem} from '../components/movie-list-item/movie-list-item';
 import {MovieListNoResults} from '../components/movie-list-no-results/movie-list-no-results';
 import {MovieListLoading} from '../components/movie-list-loading/movie-list-loading';
 import {MovieListError} from '../components/movie-list-error/movie-list-error';
-import {MovieListPagination} from '../components/movie-list-pagination/movie-list-pagination';
+import {MovieSearchBox} from '../../../../shared/components/movie-search-box/movie-search-box.component';
+import {MovieListHeader} from '../components/movie-list-header/movie-list-header';
+import {MovieListResultsInfo} from '../components/movie-list-results-info/movie-list-results-info';
+import {MovieListResults} from '../components/movie-list-results/movie-list-results';
 
 type PageState =
   | { state: 'idle' }
@@ -24,34 +25,29 @@ type PageState =
 @Component({
   selector: 'app-movie-list',
   imports: [
-    LucideAngularModule,
-    MovieListPlaceholderSearch,
-    MovieListLogin,
     FormsModule,
     ReactiveFormsModule,
     AsyncPipe,
-    MovieListItem,
+    MovieSearchBox,
+    MovieListPlaceholderSearch,
+    MovieListLogin,
     MovieListNoResults,
     MovieListLoading,
     MovieListError,
-    MovieListPagination
+    MovieListHeader,
+    MovieListResultsInfo,
+    MovieListResults
   ],
   templateUrl: './movie-list-page.component.html',
 })
 export class MovieListPage implements OnInit {
-  // Icons
-  protected readonly Film = Film;
-  protected readonly Search = Search;
-  protected readonly LogOut = LogOut;
-
-  protected readonly route = inject(ActivatedRoute);
+  private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly auth= inject(AuthService);
   private readonly movies = inject(MovieApiService);
 
   readonly isLoggedIn = this.auth.status;
-
-  readonly searchControl = new FormControl<string>('');
+  readonly searchControl = new FormControl<string>('', { nonNullable: true });
 
   moviesPageState$ = this.route.queryParamMap.pipe(
     map(params => ({
@@ -136,14 +132,10 @@ export class MovieListPage implements OnInit {
     }
 
   logout(): void {
+    this.searchControl.setValue('');
     this.auth.logout();
-  }
-
-  goToPage(pageNumber: number): void {
-    void this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { page: pageNumber },
-      queryParamsHandling: 'merge',
+    void this.router.navigate(['/'], {
+      queryParams: {},
       replaceUrl: true
     });
   }
