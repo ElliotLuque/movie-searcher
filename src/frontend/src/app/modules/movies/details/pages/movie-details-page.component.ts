@@ -10,6 +10,7 @@ import {MoviePlotSection} from '../components/movie-plot-section/movie-plot-sect
 import {MovieInformationSection} from '../components/movie-information-section/movie-information-section.component';
 import {MovieAttribute} from '../components/movie-attribute/movie-attribute';
 import {Title} from '@angular/platform-browser';
+import {MovieDetailSkeleton} from '../components/movie-detail-skeleton/movie-detail-skeleton';
 
 @Component({
   selector: 'app-movie-details',
@@ -21,7 +22,8 @@ import {Title} from '@angular/platform-browser';
     MovieGenre,
     MoviePlotSection,
     MovieInformationSection,
-    MovieAttribute
+    MovieAttribute,
+    MovieDetailSkeleton
   ],
   templateUrl: './movie-details-page.component.html',
 })
