@@ -1,0 +1,35 @@
+@if (hasMultiplePages()) {
+  <nav class="flex items-center justify-center gap-2 py-8">
+    <button
+      [disabled]="isFirst()"
+      [ngClass]="disabledClasses(isFirst())"
+      (click)="go(current()-1)"
+      class="rounded-md px-3 h-9 border text-sm border-gray-200 font-medium transition-colors">
+      Previous
+    </button>
+
+    @for (button of buttons(); track button.label) {
+      @if (button.ellipsis) {
+        <span class="text-ellipsis">…</span>
+      } @else {
+        <button
+          [ngClass]="buttonClasses(button)"
+          (click)="go(button.page)"
+          class="rounded-md px-3 h-9 border text-sm border-gray-200 font-medium transition-colors"
+        >
+          {{ button.label }}
+        </button>
+      }
+    }
+
+
+    <button
+      [disabled]="isLast()"
+      [ngClass]="disabledClasses(isLast())"
+      (click)="go(current()+1)"
+      class="rounded-md px-3 h-9 border text-sm border-gray-200 font-medium transition-colors"
+    >
+      Next
+    </button>
+  </nav>
+}

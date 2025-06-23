@@ -13,7 +13,9 @@ import {MovieListItem} from '../components/movie-list-item/movie-list-item';
 import {MovieListNoResults} from '../components/movie-list-no-results/movie-list-no-results';
 import {MovieListLoading} from '../components/movie-list-loading/movie-list-loading';
 import {MovieListError} from '../components/movie-list-error/movie-list-error';
+import {MovieListPagination} from '../components/movie-list-pagination/movie-list-pagination';
 
+const PAGE_SIZE = 10
 type PageState =
   | { state: 'idle' }
   | { state: 'loading' }
@@ -32,7 +34,8 @@ type PageState =
     MovieListItem,
     MovieListNoResults,
     MovieListLoading,
-    MovieListError
+    MovieListError,
+    MovieListPagination
   ],
   templateUrl: './movie-list-page.component.html',
 })
@@ -79,10 +82,10 @@ export class MovieListPage {
 
       const page = pageState.page.page;
       const total = pageState.page.totalElements;
-      const pageSize = pageState.page.results.length;
+      const count = pageState.page.results.length;
 
-      const from = (page - 1) * pageSize + 1;
-      const to   = Math.min(from + pageState.page.results.length - 1, total);
+      const from = (page - 1) * PAGE_SIZE + 1; // TODO: Dato desde el servidor
+      const to   = from + count - 1;
 
       return { from, to, total };
     }),
@@ -113,9 +116,13 @@ export class MovieListPage {
       .subscribe((value) => {
         const trimmed = value?.trim();
 
+        const queryParams = trimmed
+          ? { search: trimmed, page: 1}
+          : {search: null, page: null};
+
         void this.router.navigate([], {
           relativeTo: this.route,
-          queryParams: { search: trimmed || null },
+          queryParams,
           queryParamsHandling: 'merge',
         });
     })
@@ -123,6 +130,15 @@ export class MovieListPage {
 
   logout(): void {
     this.auth.logout();
+  }
+
+  goToPage(pageNumber: number): void {
+    void this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { page: pageNumber },
+      queryParamsHandling: 'merge',
+      replaceUrl: true
+    });
   }
 
   get isSearching(): boolean {
