@@ -30,11 +30,13 @@
           >
         </div>
       </div>
-      <div class="text-center mb-4">
-        @if (pageRange$ | async; as pageRange) {
-          <p class="text-sm text-gray-500">Showing {{pageRange.from}}-{{pageRange.to}} of {{pageRange.total}} results</p>
+      @if (pageRange$ | async; as pageRange) {
+        @if (pageRange.total > 0) {
+          <div class="text-center mb-6">
+            <p class="text-sm text-gray-500">Showing {{pageRange.from}}-{{pageRange.to}} of {{pageRange.total}} results</p>
+          </div>
         }
-      </div>
+      }
       @if (!isSearching) {
         <app-movie-list-placeholder-search></app-movie-list-placeholder-search>
       }
@@ -54,7 +56,7 @@
           } @else {
             <app-movie-list-pagination [page]="page" (pageChange)="goToPage($event)"></app-movie-list-pagination>
 
-            <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+            <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 py-8">
               @for (compactMovie of page?.results; track compactMovie.imdbId) {
                 <app-movie-list-item [movie]="compactMovie"></app-movie-list-item>
               }
