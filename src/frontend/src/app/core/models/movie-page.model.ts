@@ -5,7 +5,7 @@ export interface MoviePage {
   results: MoviePageItem[];
 }
 
-interface MoviePageItem {
+export interface MoviePageItem {
   imdbId: string;
   title: string;
   year: number;

@@ -1,0 +1,17 @@
+<a routerLink="/movies/{{movie().imdbId}}">
+  <div class="rounded-lg border border-gray-100 shadow-xs hover:shadow-lg transition-shadow cursor-pointer h-full">
+    <div class="flex flex-col space-y-1.5 p-0">
+      @if (false) {
+        <!--  TODO: añadir imagen real -->
+      } @else {
+        <app-movie-missing-image></app-movie-missing-image>
+      }
+    </div>
+    <div class="p-4">
+      <h3 class="font-semibold tracking-tight text-lg mb-2 line-clamp-2">{{movie().title}}</h3>
+      <div class="flex items-center justify-between text-sm text-gray-500 mb-2">
+        <span>{{movie().year}}</span>
+      </div>
+    </div>
+  </div>
+</a>

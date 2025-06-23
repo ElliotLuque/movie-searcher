@@ -1,0 +1,21 @@
+<div class="text-center py-16">
+  <div class="max-w-md mx-auto">
+    <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+      <lucide-angular [img]="Search" class="h-12 w-12 text-gray-500"></lucide-angular>
+    </div>
+    <h2 class="text-2xl font-semibold mb-4">Search for your favorite movie!</h2>
+    <p class="text-gray-500 mb-8">Type the name of a movie in the search bar to start exploring our external movie catalog.</p>
+    <div class="space-y-2">
+      <p class="text-sm font-medium text-gray-500 mb-4">Try searching:</p>
+      <div class="flex flex-wrap justify-center gap-2">
+        @for(movie of moviesToSearch; track $index) {
+          <a [routerLink]="['/']" [queryParams]="{ search: movie }">
+            <button class="px-3 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded-full transition-colors cursor-pointer">
+              {{movie}}
+            </button>
+          </a>
+        }
+      </div>
+    </div>
+  </div>
+</div>
