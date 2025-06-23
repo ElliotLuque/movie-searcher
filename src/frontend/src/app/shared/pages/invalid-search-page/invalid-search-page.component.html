@@ -1,0 +1,22 @@
+<main class="min-h-screen bg-white flex items-center justify-center p-4">
+  <div class="rounded-lg border border-gray-200 shadow-xs w-full max-w-md">
+    <div class="p-8 text-center">
+      <div class="mb-6">
+        <div class="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 bg-red-100">
+          <lucide-angular [img]="CircleX" class="h-12 w-12 text-red-400"></lucide-angular>
+        </div>
+        <h1 class="text-6xl font-bold text-red-400 mb-2">400</h1>
+        <h2 class="text-2xl font-semibold mb-4">Invalid search</h2>
+        <p class="mb-6 text-gray-500">The server couldn’t process the request due to invalid syntax or incorrect data. Please check the information and try again.</p>
+      </div>
+      <div class="space-y-3">
+        <a routerLink="/" class="block">
+          <button class="inline-flex items-center justify-center rounded-md text-sm font-medium h-10 px-4 py-2 gap-2 cursor-pointer border border-gray-200 hover:bg-gray-50">
+            <lucide-angular [img]="ArrowLeftIcon" class="h-4 w-4"></lucide-angular>
+            Return to list
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
