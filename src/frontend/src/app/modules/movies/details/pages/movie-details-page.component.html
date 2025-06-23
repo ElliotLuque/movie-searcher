@@ -11,27 +11,27 @@
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div class="relative lg:col-span-1 h-[33rem]">
-          <img imageFallback ngSrc="{{movie?.imageUrl}}" fill priority alt="{{movie?.title}}" class="rounded-lg border border-gray-200 shadow-sm h-full w-full">
+          <img imageFallback ngSrc="{{movie.imageUrl}}" fill priority alt="{{movie.title}}" class="rounded-lg border border-gray-200 shadow-sm h-full w-full">
         </div>
         <div class="lg:col-span-2 flex flex-col gap-6">
           <div>
-            <h1 class="text-4xl font-bold mb-2">{{movie?.title}}</h1>
+            <h1 class="text-4xl font-bold mb-2">{{movie.title}}</h1>
             <div class="flex items-center gap-4 text-gray-500 mb-4">
-              @if ((movie?.rating ?? 0) > 0) {
-                <app-movie-attribute [text]="movie?.rating?.toString()" [icon]="Star" [iconColor]="'fill-yellow-400 text-yellow-400'"></app-movie-attribute>
+              @if (movie.rating > 0) {
+                <app-movie-attribute [text]="movie.rating.toString()" [icon]="Star" [iconColor]="'fill-yellow-400 text-yellow-400'"></app-movie-attribute>
               } @else {
                 <app-movie-attribute [text]="'N/A'" [icon]="Star" [iconColor]="'fill-gray-400 text-gray-400'"></app-movie-attribute>
               }
-              <app-movie-attribute [text]="movie?.year?.toString()" [icon]="Calendar"></app-movie-attribute>
-              <app-movie-attribute [text]="movie?.runtime?.toString() + ' min'" [icon]="Clock"></app-movie-attribute>
+              <app-movie-attribute [text]="movie.year.toString()" [icon]="Calendar"></app-movie-attribute>
+              <app-movie-attribute [text]="movie.runtime.toString() + ' min'" [icon]="Clock"></app-movie-attribute>
             </div>
             <div class="flex flex-wrap gap-2 mb-2">
-              @for(genre of movie?.genres; track $index) {
+              @for(genre of movie.genres; track $index) {
                 <app-movie-genre [genre]="genre"></app-movie-genre>
               }
             </div>
           </div>
-          <app-movie-plot [plot]="movie?.plot"></app-movie-plot>
+          <app-movie-plot [plot]="movie.plot"></app-movie-plot>
           <app-movie-information [movie]="movie"></app-movie-information>
         </div>
       </div>
