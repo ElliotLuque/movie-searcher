@@ -16,7 +16,7 @@ public record MoviePageResponse(
                 ),
                 arraySchema = @Schema(
                         description = "List of movies contained in this page",
-                        example     = "[{ \"imdbId\": \"tt0076759\", \"title\": \"Star Wars: Episode IV - A New Hope\" }]"
+                        example     = "[{ \"imdbId\": \"tt0076759\", \"title\": \"Star Wars: Episode IV - A New Hope\", \"year\": \"1977\" }, { \"imdbId\": \"tt0080684\", \"title\": \"Star Wars: Episode V - The Empire Strikes Back\", \"year\": \"1980\" }]"
                 ),
                 minItems = 0
         )
