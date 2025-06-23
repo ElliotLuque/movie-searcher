@@ -6,9 +6,9 @@ import {InvalidSearchPage} from './shared/pages/invalid-search-page/invalid-sear
 import {ErrorPage} from './shared/pages/error-page/error-page';
 
 export const routes: Routes = [
-  { path: '', component: MovieListPage },
-  { path: 'movies/:imdbId', component: MovieDetailsPage },
-  { path: 'invalid-search', component: InvalidSearchPage },
-  { path: 'not-found', component: NotFoundPage },
-  { path: '**', component: ErrorPage },
+  { path: '', component: MovieListPage, title: 'Movie Searcher'},
+  { path: 'movies/:imdbId', component: MovieDetailsPage, title: 'Movie Details - Movie Searcher' },
+  { path: 'invalid-search', component: InvalidSearchPage, title: 'Invalid Search - Movie Searcher' },
+  { path: 'not-found', component: NotFoundPage, title: 'Not Found - Movie Searcher' },
+  { path: '**', component: ErrorPage, title: 'Error - Movie Searcher' },
 ];

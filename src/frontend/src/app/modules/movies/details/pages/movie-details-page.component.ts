@@ -9,6 +9,7 @@ import {MovieGenre} from '../../../../shared/components/movie-genre/movie-genre'
 import {MoviePlotSection} from '../components/movie-plot-section/movie-plot-section.component';
 import {MovieInformationSection} from '../components/movie-information-section/movie-information-section.component';
 import {MovieAttribute} from '../components/movie-attribute/movie-attribute';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-movie-details',
@@ -34,6 +35,7 @@ export class MovieDetailsPage {
   private readonly api = inject(MovieApiService);
   private route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly titleService = inject(Title)
 
   movie?: Movie;
 
@@ -42,9 +44,25 @@ export class MovieDetailsPage {
 
     if (imdbId) {
       this.api.getMovie(imdbId).subscribe({
-        next: (movie) => this.movie = movie,
+        next: (movie) => {
+          this.movie = movie
+          this.titleService.setTitle(`${movie.title} - Movie Searcher`);
+        },
         error: (err) => {
-            this.router.navigate(['/not-found']);
+            switch (err.status) {
+              case 401:
+                void this.router.navigate(['/']);
+                break;
+              case 400:
+                void this.router.navigate(['/invalid-search']);
+                break;
+              case 404:
+                void this.router.navigate(['/not-found']);
+                break;
+              default:
+                void this.router.navigate(['/error']);
+                break;
+            }
         }
       });
     }
