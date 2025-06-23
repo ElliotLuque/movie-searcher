@@ -3,27 +3,27 @@ import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {ArrowLeftIcon, Calendar, Clock, LucideAngularModule, Star} from 'lucide-angular';
 import {MovieApiService} from '../../../../core/services/movie-api.service';
 import {Movie} from '../../../../core/models/movie.model';
-import {MovieMissingImage} from '../../../../shared/components/movie-missing-image/movie-missing-image';
-import {NgOptimizedImage} from '@angular/common';
+import {Location, NgOptimizedImage} from '@angular/common';
 import {MovieGenre} from '../../../../shared/components/movie-genre/movie-genre';
 import {MoviePlotSection} from '../components/movie-plot-section/movie-plot-section.component';
 import {MovieInformationSection} from '../components/movie-information-section/movie-information-section.component';
 import {MovieAttribute} from '../components/movie-attribute/movie-attribute';
 import {Title} from '@angular/platform-browser';
 import {MovieDetailSkeleton} from '../components/movie-detail-skeleton/movie-detail-skeleton';
+import {ImageFallback} from '../../../../core/directives/image-fallback';
 
 @Component({
   selector: 'app-movie-details',
   imports: [
     RouterLink,
     LucideAngularModule,
-    MovieMissingImage,
     NgOptimizedImage,
     MovieGenre,
     MoviePlotSection,
     MovieInformationSection,
     MovieAttribute,
-    MovieDetailSkeleton
+    MovieDetailSkeleton,
+    ImageFallback
   ],
   templateUrl: './movie-details-page.component.html',
 })
@@ -37,7 +37,8 @@ export class MovieDetailsPage {
   private readonly api = inject(MovieApiService);
   private route = inject(ActivatedRoute);
   private readonly router = inject(Router);
-  private readonly titleService = inject(Title)
+  private readonly titleService = inject(Title);
+  private readonly location = inject(Location);
 
   movie?: Movie;
 
@@ -68,5 +69,9 @@ export class MovieDetailsPage {
         }
       });
     }
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

@@ -59,6 +59,7 @@ public class MovieController implements MovieControllerDoc {
     private MoviePageResponse toResponse(MoviePage page) {
         return new MoviePageResponse(
                 page.page(),
+                page.pageSize(),
                 page.totalPages(),
                 page.totalElements(),
                 page.results().stream()

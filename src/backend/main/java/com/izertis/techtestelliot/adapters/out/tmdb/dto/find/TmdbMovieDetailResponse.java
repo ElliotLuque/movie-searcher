@@ -7,6 +7,7 @@ import java.util.List;
 public record TmdbMovieDetailResponse(
         @JsonProperty("imdb_id") String imdbId,
         @JsonProperty("title") String title,
+        @JsonProperty("poster_path") String posterPath,
         @JsonProperty("release_date") String releaseDate,
         @JsonProperty("vote_average") double voteAverage,
         @JsonProperty("overview") String overview,

@@ -39,7 +39,7 @@ public class OmdbMovieCatalogAdapter implements MovieCatalog {
                 .bodyToMono(OmdbMovieSearchResponse.class)
                 .map(resp -> {
                     if (resp.response().equalsIgnoreCase("False")) {
-                        return new MoviePage(page, 0, 0, List.of());
+                        return new MoviePage(page, 0, 0, 0, List.of());
                     }
 
                     return pageMapper.toDomain(resp, page);

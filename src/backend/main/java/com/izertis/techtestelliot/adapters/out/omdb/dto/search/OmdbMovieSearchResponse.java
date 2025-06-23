@@ -12,6 +12,7 @@ public record OmdbMovieSearchResponse(
     public record OmdbMovieSearchItemDTO(
             @JsonProperty("imdbID") String imdbId,
             @JsonProperty("Title") String title,
+            @JsonProperty("Poster") String poster,
             @JsonProperty("Year") String year
     ) {
     }

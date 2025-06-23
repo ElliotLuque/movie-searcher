@@ -17,6 +17,7 @@ public interface TmdbMovieMapper {
     @Mapping(target = "language", source = "originalLanguage", qualifiedByName = "mapLanguageToDisplayName")
     @Mapping(target = "genres", expression = "java(dto.genres().stream().map(g -> g.name()).toList())")
     @Mapping(target = "director", source = "credits.crew", qualifiedByName = "extractDirector")
+    @Mapping(target = "imageUrl", source = "posterPath", qualifiedByName = "parsePosterPath")
     Movie toDomain(TmdbMovieDetailResponse dto);
 
     @Named("extractYear")
@@ -39,4 +40,11 @@ public interface TmdbMovieMapper {
                 .map(TmdbMovieDetailResponse.Credits.CrewMember::name)
                 .findFirst()
                 .orElse("Unknown");
-    }}
+    }
+    @Named("parsePosterPath")
+    default String parsePosterPath(String posterPath) {
+        return "https://image.tmdb.org/t/p/original" + posterPath;
+    }
+}
+
+

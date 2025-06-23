@@ -1,6 +1,7 @@
 package com.izertis.techtestelliot.adapters.out.omdb.mapper;
 
 import com.izertis.techtestelliot.adapters.out.omdb.dto.find.OmdbMovieDetailResponse;
+import com.izertis.techtestelliot.adapters.out.omdb.dto.search.OmdbMovieSearchResponse;
 import com.izertis.techtestelliot.domain.model.Movie;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -15,6 +16,7 @@ public interface OmdbMovieMapper {
    @Mapping(target = "genres", source = "genre", qualifiedByName = "parseGenres")
    @Mapping(target = "runtime", source = "runtime", qualifiedByName = "parseRuntime")
    @Mapping(target = "rating", source = "imdbRating", qualifiedByName = "parseRating")
+   @Mapping(target = "imageUrl", source = "poster")
    Movie toDomain(OmdbMovieDetailResponse resp);
 
    // Helpers

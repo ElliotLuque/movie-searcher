@@ -26,8 +26,8 @@ public class MovieControllerTest {
 
     @Test
     void shouldReturnMoviePageWhenQueryIsValid() {
-        var movie = new Movie("tt1234567", "Star Test", 2020, 8.0, "Director", "Plot", "English", 120, List.of("Action"));
-        var moviePage = new MoviePage(1, 1, 1, List.of(movie));
+        var movie = new Movie("tt1234567", "Star Test", "https://example.com/image.jpg",2020, 8.0, "Director", "Plot", "English", 120, List.of("Action"));
+        var moviePage = new MoviePage(1, 1, 1, 1, List.of(movie));
 
         Mockito.when(useCase.searchByTitle("star", 1)).thenReturn(Mono.just(moviePage));
 

@@ -14,5 +14,5 @@ export class NotFoundPage {
   protected readonly Film = Film;
   protected readonly Search = Search;
 
-  protected readonly popularMovies = ["Star Wars", "Matrix", "Pirates of the Caribbean"];
+  protected readonly popularMovies = ["Star Wars", "Pulp Fiction", "Pirates of the Caribbean"];
 }

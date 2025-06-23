@@ -12,5 +12,5 @@ import {RouterLink} from '@angular/router';
 })
 export class MovieListPlaceholderSearch {
   protected readonly Search = Search;
-  protected readonly moviesToSearch = ["Star Wars", "Matrix", "Pulp Fiction"];
+  protected readonly moviesToSearch = ["Star Wars", "Pulp Fiction", "Pirates of the Caribbean"];
 }

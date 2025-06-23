@@ -1,13 +1,15 @@
 import {Component, input} from '@angular/core';
 import {MoviePageItem} from '../../../../../core/models/movie-page.model';
 import {RouterLink} from '@angular/router';
-import {MovieMissingImage} from '../../../../../shared/components/movie-missing-image/movie-missing-image';
+import {NgOptimizedImage} from '@angular/common';
+import {ImageFallback} from '../../../../../core/directives/image-fallback';
 
 @Component({
   selector: 'app-movie-list-item',
   imports: [
     RouterLink,
-    MovieMissingImage
+    NgOptimizedImage,
+    ImageFallback
   ],
   templateUrl: './movie-list-item.html',
 })

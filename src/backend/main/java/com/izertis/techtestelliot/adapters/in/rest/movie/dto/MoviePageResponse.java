@@ -8,6 +8,7 @@ import java.util.List;
 @Schema(name = "Movie page", description = "Paginated wrapper that contains the current page index, total counts and a list of movie items.")
 public record MoviePageResponse(
         @Schema(description = "Current page index (1-based)", example = "1", minimum = "1") int page,
+        @Schema(description = "Number of elements per page", example = "10") int pageSize,
         @Schema(description = "Total number of pages available to query", example = "5") int totalPages,
         @Schema(description = "Total number of elements that match the query", example = "663")int totalElements,
         @ArraySchema(

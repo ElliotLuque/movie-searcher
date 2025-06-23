@@ -1,6 +1,7 @@
 package com.izertis.techtestelliot.adapters.out.omdb.mapper;
 
 import com.izertis.techtestelliot.adapters.out.omdb.dto.search.OmdbMovieSearchResponse;
+import com.izertis.techtestelliot.domain.model.Movie;
 import com.izertis.techtestelliot.domain.model.MoviePage;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -11,10 +12,14 @@ public interface OmdbMoviePageMapper {
     int PAGE_SIZE = 10; // OMDB api doesn't let you change page size
 
     @Mapping(target = "page",          source = "currentPage")
+    @Mapping(target = "pageSize",       constant = "10")
     @Mapping(target = "totalElements",  source = "response.totalResults", qualifiedByName = "parseLong")
     @Mapping(target = "totalPages",     source = "response.totalResults", qualifiedByName = "calcPages")
     @Mapping(target = "results",       source = "response.search")
     MoviePage toDomain(OmdbMovieSearchResponse response, int currentPage);
+
+    @Mapping(target = "imageUrl", source = "poster")
+    Movie toDomain(OmdbMovieSearchResponse.OmdbMovieSearchItemDTO resp);
 
     // Helpers
     @Named("parseLong")

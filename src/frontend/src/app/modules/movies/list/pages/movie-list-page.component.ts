@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {AuthService} from '../../../../core/services/auth-service';
 import {Film, LucideAngularModule, Search, LogOut} from 'lucide-angular';
 import {MovieListPlaceholderSearch} from '../components/movie-list-placeholder-search/movie-list-placeholder-search';
@@ -15,7 +15,6 @@ import {MovieListLoading} from '../components/movie-list-loading/movie-list-load
 import {MovieListError} from '../components/movie-list-error/movie-list-error';
 import {MovieListPagination} from '../components/movie-list-pagination/movie-list-pagination';
 
-const PAGE_SIZE = 10
 type PageState =
   | { state: 'idle' }
   | { state: 'loading' }
@@ -39,7 +38,7 @@ type PageState =
   ],
   templateUrl: './movie-list-page.component.html',
 })
-export class MovieListPage {
+export class MovieListPage implements OnInit {
   // Icons
   protected readonly Film = Film;
   protected readonly Search = Search;
@@ -81,10 +80,11 @@ export class MovieListPage {
       if (pageState.state !== 'loaded') return null;
 
       const page = pageState.page.page;
+      const pageSize = pageState.page.pageSize;
       const total = pageState.page.totalElements;
       const count = pageState.page.results.length;
 
-      const from = (page - 1) * PAGE_SIZE + 1; // TODO: Dato desde el servidor
+      const from = (page - 1) * pageSize + 1;
       const to   = from + count - 1;
 
       return { from, to, total };
@@ -104,29 +104,36 @@ export class MovieListPage {
     map(s => (s.state === 'loaded' ? s.page : null))
   );
 
-  constructor() {
-    const firstSearch = this.route.snapshot.queryParamMap.get('search') ?? '';
-    this.searchControl.setValue(firstSearch);
+  constructor() { }
+
+  ngOnInit(): void {
+    this.route.queryParamMap
+      .pipe(distinctUntilChanged(
+        (a, b) => a.get('search') === b.get('search')
+      ))
+      .subscribe(params => {
+        const q = params.get('search') ?? '';
+        this.searchControl.setValue(q, { emitEvent: false });
+      });
 
     this.searchControl.valueChanges
       .pipe(
         debounceTime(250),
         distinctUntilChanged()
       )
-      .subscribe((value) => {
+      .subscribe(value => {
         const trimmed = value?.trim();
-
         const queryParams = trimmed
-          ? { search: trimmed, page: 1}
-          : {search: null, page: null};
+          ? { search: trimmed, page: 1 }
+          : { search: null, page: null };
 
         void this.router.navigate([], {
           relativeTo: this.route,
           queryParams,
-          queryParamsHandling: 'merge',
+          queryParamsHandling: 'merge'
         });
-    })
-  }
+      });
+    }
 
   logout(): void {
     this.auth.logout();

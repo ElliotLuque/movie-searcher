@@ -2,20 +2,16 @@
   <div class="bg-background min-h-screen">
     <div class="container mx-auto px-8 py-16">
       <div class="mb-16">
-        <a routerLink="/">
-          <button class="inline-flex items-center justify-center rounded-md text-sm font-medium gap-2 px-4 py-2 hover:bg-gray-100 transition-colors cursor-pointer">
-            <lucide-angular [img]="ArrowLeftIcon" class="h-4 w-4"></lucide-angular>
-            Return to list
-          </button>
-        </a>
+        <button
+          (click)="goBack()"
+          class="inline-flex items-center justify-center rounded-md text-sm font-medium gap-2 px-4 py-2 hover:bg-gray-100 transition-colors cursor-pointer">
+          <lucide-angular [img]="ArrowLeftIcon" class="h-4 w-4"></lucide-angular>
+          Return to list
+        </button>
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div class="lg:col-span-1">
-          @if(movie?.imageUrl) {
-            <img ngSrc="{{movie?.imageUrl}}" alt="{{movie?.title}}" class="rounded-lg shadow-sm" fill>
-          } @else {
-            <app-movie-missing-image></app-movie-missing-image>
-          }
+        <div class="relative lg:col-span-1 h-[33rem]">
+          <img imageFallback ngSrc="{{movie?.imageUrl}}" fill priority alt="{{movie?.title}}" class="rounded-lg border border-gray-200 shadow-sm h-full w-full">
         </div>
         <div class="lg:col-span-2 flex flex-col gap-6">
           <div>

@@ -8,5 +8,5 @@ export interface Movie {
   genres: string[];
   language: string;
   runtime: number;
-  imageUrl?: string;
+  imageUrl: string;
 }
