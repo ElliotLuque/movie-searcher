@@ -1,6 +1,6 @@
 import {inject, Injectable, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {catchError, map, of} from 'rxjs';
+import {catchError, map, Observable, of, tap} from 'rxjs';
 import {environment} from '../../../environments/environment';
 
 @Injectable({
@@ -16,10 +16,12 @@ export class AuthService {
     this.refreshStatus();
   }
 
-  login(): void {
-    this.http
+  login(): Observable<void> {
+    return this.http
       .post<void>(`${this.baseUrl}/login`, {}, { withCredentials: true })
-      .subscribe({ next: () => this.refreshStatus() });
+      .pipe(
+        tap(() => this.refreshStatus())
+      );
   }
 
   logout(): void {

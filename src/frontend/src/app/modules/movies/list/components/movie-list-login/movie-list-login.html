@@ -11,6 +11,9 @@
     >
       <lucide-angular [img]="LogIn" class="h-4 w-4"></lucide-angular>
       Log in
+      @if (loading) {
+        <lucide-angular [img]="LoaderCircle" class="h-5 w-5 text-white animate-spin"></lucide-angular>
+      }
     </button>
   </div>
 </div>
