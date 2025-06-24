@@ -2,7 +2,7 @@ jwt:
   cookie:
     secure: false
     same-site: "Lax"
-  expiration: 12h
+  expiration: 43200
 
 cors:
   allowed-origins:

@@ -1,12 +1,11 @@
 package com.izertis.techtestelliot.config.security.jwt;
 
+import com.izertis.techtestelliot.config.properties.JwtProperties;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
-import org.springframework.beans.factory.annotation.Value;
 import javax.crypto.SecretKey;
 import java.time.Duration;
 import java.util.Date;
@@ -16,23 +15,14 @@ import java.util.Date;
 public class JwtUtil {
 
     private final SecretKey secretKey;
-
-    @Value("${jwt.expiration}")
-    @Getter
-    private Duration expiration;
-
-    @Value("${jwt.cookie.secure}")
-    private boolean cookieSecure;
-
-    @Value("${jwt.cookie.same-site}")
-    private String cookieSameSite;
+    private final JwtProperties jwtProperties;
 
     public String generateToken() {
         long now = System.currentTimeMillis();
         return Jwts.builder()
                 .subject("guest")
                 .issuedAt(new Date(now))
-                .expiration(new Date(now + expiration.toMillis()))
+                .expiration(new Date(now + jwtProperties.getExpiration().toMillis()))
                 .signWith(secretKey)
                 .compact();
     }
@@ -52,17 +42,17 @@ public class JwtUtil {
     public ResponseCookie buildAuthCookie(String token) {
         return ResponseCookie.from("auth_token", token)
                 .httpOnly(true)
-                .secure(cookieSecure)
-                .sameSite(cookieSameSite)
+                .secure(jwtProperties.getCookie().isSecure())
+                .sameSite(jwtProperties.getCookie().getSameSite())
                 .path("/")
-                .maxAge(expiration)
+                .maxAge(jwtProperties.getExpiration())
                 .build();
     }
 
     public ResponseCookie buildLogoutCookie() {
         return ResponseCookie.from("auth_token", "")
                 .httpOnly(true)
-                .secure(cookieSecure)
+                .secure(jwtProperties.getCookie().isSecure())
                 .sameSite("Lax")
                 .path("/")
                 .maxAge(Duration.ZERO)

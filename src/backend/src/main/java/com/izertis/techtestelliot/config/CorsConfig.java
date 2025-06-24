@@ -1,5 +1,6 @@
 package com.izertis.techtestelliot.config;
 
+import com.izertis.techtestelliot.config.properties.CorsProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

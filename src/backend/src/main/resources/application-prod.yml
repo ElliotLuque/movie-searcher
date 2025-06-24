@@ -2,7 +2,7 @@ jwt:
   cookie:
     secure: true
     same-site: "None"
-  expiration: 2h
+  expiration: 7200
 
 cors:
   allowed-origins:
