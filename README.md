@@ -96,14 +96,17 @@ cd src/frontend
 npm install
 ng serve
 ```
-> Accede a: http://localhost:4200
+
+5. Accede a la aplicación:
+- Frontend: http://localhost:4200
+- Backend: http://localhost:8080
 
 
 ## 📁 Estructura del Proyecto
 ```
 izertis-tech-test/
 ├── src/                     # Carpeta raíz del código fuente
-│   ├── backend/             # Código fuente de Spring Boot
+│   ├── backend/             # Código fuente de Spring
 │   │   ├── src/main/java
 │   │   ├── src/main/resources
 │   │   └── Dockerfile
