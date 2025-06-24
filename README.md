@@ -119,6 +119,7 @@ Funciona como un proxy entre el frontend y los servicios públicos de películas
 - Documentación completa con OpenAPI SwaggerUI
 - Integración con OMDb y TMDb a través de Spring WebClient
 - Configuración de CORS para habilitar peticiones desde frontend web
+- Caché server-side con Caffeine y client-side con HTTP headers
 - Variables externas mediante .env para facilitar configuración y despliegue
 
 ### 🧱 Arquitectura
