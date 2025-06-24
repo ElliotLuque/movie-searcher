@@ -38,10 +38,9 @@ cd izertis-tech-test
 OMDB_API_KEY=tu_clave_omdb
 TMDB_API_KEY=tu_clave_tmdb
 JWT_AUTH_SECRET=tu_clave_secreta
-SPRING_PROFILES_ACTIVE=dev
 ```
 > [!NOTE]
-> Solo necesitas una única ```API_KEY```. Asegúrate de cambiar el proveedor ```(movies.provider)``` en ```resources/application.yml``` y seleccionar el mismo que corresponde a tu clave, en caso de que solo estés utilizando una.
+> Solo necesitas una única ```API_KEY```. Asegúrate de cambiar el proveedor ```movies.provider``` en ```resources/application.yml``` y seleccionar el mismo que corresponde a tu clave, en caso de que solo estés utilizando una.
 > 
 > Para generar una clave secreta que se utilizará en la autenticación mediante JWT con el algoritmo HS256, podemos hacerlo de la siguiente manera:
 > 
@@ -127,7 +126,7 @@ Se ha adoptado una arquitectura hexagonal (Ports & Adapters) que separa claramen
 
 ## 🅰 Angular
 
-El frontend está desarrollado con Angular 20, utilizando las últimas capacidades del framework como signals, componentes standalone, directivas estructurales modernas (@if, @for) y estilos con TailwindCSS. La interfaz ofrece una experiencia fluida e interactiva para buscar y explorar películas, adaptándose correctamente al estado de carga, errores o ausencia de resultados.
+El frontend está desarrollado con Angular 20, utilizando las últimas capacidades del framework como signals, componentes standalone, sintaxis de control de flujo moderno (@if, @for) y estilos con TailwindCSS. La interfaz ofrece una experiencia fluida e interactiva para buscar y explorar películas, adaptándose correctamente al estado de carga, errores o ausencia de resultados.
 
 ### ✨ Características principales
 - Interfaz moderna con Angular 20 + TailwindCSS
