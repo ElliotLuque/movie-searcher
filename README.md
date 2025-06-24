@@ -44,7 +44,7 @@ JWT_AUTH_SECRET=tu_clave_secreta
 
 
 > [!TIP]
-> Para generar una clave secreta que se utilizará en la autenticación mediante JWT con el algoritmo HS256, podemos hacerlo de la siguiente manera:
+> La aplicación usa JWT con el algoritmo ```HS256```. Para generar una clave segura (secreto) puedes usar uno de los siguientes comandos según tu sistema operativo:
 > 
 > *Linux*:
 >   ```bash
