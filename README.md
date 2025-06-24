@@ -75,7 +75,11 @@ docker-compose up --build
 > - Java 21
 > - Node.js 20
 
-1. Ejecutar el backend
+1. Definir variables de entorno
+
+> Puedes usar el fichero .env igual que en la opción 1, exportarlas en la sesión de terminal o pasarlas con tu IDE de preferencia.
+
+3. Ejecutar el backend
 ```bash
 cd src/backend
 ./mvnw spring-boot:run
@@ -86,7 +90,7 @@ cd src/backend
 java -jar target/*.jar
 ```
 
-2. Ejecutar el frontend
+3. Ejecutar el frontend
 ```bash
 cd src/frontend
 npm install
