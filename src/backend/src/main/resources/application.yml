@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: dev
   application:
     name: izertis-tech-test-elliot
   webflux:
@@ -15,7 +17,6 @@ springdoc:
 
 jwt:
   secret: ${JWT_AUTH_SECRET}
-  expiration: 60m
 
 movies:
   provider: omdb

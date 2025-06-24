@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
-  baseApiUrl: 'https://izertis-tech-test-backend.onrender.com/api/v1'
+  production: false,
+  baseApiUrl: 'http://localhost:8080/api/v1'
 };

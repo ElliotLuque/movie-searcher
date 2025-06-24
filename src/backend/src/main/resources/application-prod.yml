@@ -1,0 +1,9 @@
+jwt:
+  cookie:
+    secure: true
+    same-site: "None"
+  expiration: 2h
+
+cors:
+  allowed-origins:
+    - https://izertis-tech-test-frontend.onrender.com

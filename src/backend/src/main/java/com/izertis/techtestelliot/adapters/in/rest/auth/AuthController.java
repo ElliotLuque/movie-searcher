@@ -27,27 +27,16 @@ public class AuthController implements AuthControllerDoc {
     public Mono<ResponseEntity<Void>> login(ServerWebExchange exchange) {
         String token = jwt.generateToken();
 
-        ResponseCookie cookie = ResponseCookie.from("auth_token", token)
-                .httpOnly(true)
-                .sameSite("Lax")
-                .path("/")
-                .maxAge(jwt.getExpiration())
-                .build();
-
+        var cookie = jwt.buildAuthCookie(token);
         exchange.getResponse().addCookie(cookie);
+
         return Mono.just(ResponseEntity.noContent().build());
     }
 
     @Override
     @PostMapping("/logout")
     public Mono<ResponseEntity<Void>> logout(ServerWebExchange exchange) {
-        ResponseCookie cookie = ResponseCookie.from("auth_token", "")
-                .httpOnly(true)
-                .sameSite("Lax")
-                .path("/")
-                .maxAge(Duration.ZERO)
-                .build();
-
+        var cookie = jwt.buildLogoutCookie();
         exchange.getResponse().addCookie(cookie);
 
         return Mono.just(ResponseEntity.noContent().build());
