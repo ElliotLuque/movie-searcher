@@ -116,7 +116,7 @@ Funciona como un proxy entre el frontend y los servicios públicos de películas
 ### ✨ Características principales
 - API RESTful reactiva para búsqueda y detalle de películas
 - Autenticación con JWT usando cookies seguras (HttpOnly)
-- Documentación completa con OpenAPI SwaggerUI
+- Documentación completa con OpenAPI [SwaggerUI](https://izertis-tech-test-backend.onrender.com/docs)
 - Integración con OMDb y TMDb a través de Spring WebClient
 - Configuración de CORS para habilitar peticiones desde frontend web
 - Caché server-side con Caffeine y client-side con HTTP headers
