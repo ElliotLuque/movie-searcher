@@ -24,8 +24,8 @@ import java.util.List;
 @ConditionalOnProperty(name = "movies.provider", havingValue = "tmdb")
 public class TmdbMovieCatalogAdapter implements MovieCatalog {
     private final @Qualifier("tmdbWebClient") WebClient client;
-    private final TmdbMoviePageMapper pageMapper;
     private final TmdbMovieMapper movieMapper;
+    private final TmdbMoviePageMapper pageMapper;
 
     @Override
     @Cacheable(value = "moviesByTitle", key = "#title + '-' + #page")
