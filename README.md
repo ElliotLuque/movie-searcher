@@ -41,7 +41,9 @@ JWT_AUTH_SECRET=tu_clave_secreta
 ```
 > [!NOTE]
 > Solo necesitas una única ```API_KEY```. Asegúrate de cambiar el proveedor ```movies.provider``` en ```resources/application.yml``` y seleccionar el mismo que corresponde a tu clave, en caso de que solo estés utilizando una.
-> 
+
+
+> [!TIP]
 > Para generar una clave secreta que se utilizará en la autenticación mediante JWT con el algoritmo HS256, podemos hacerlo de la siguiente manera:
 > 
 > *Linux*:
