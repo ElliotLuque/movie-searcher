@@ -36,7 +36,7 @@ public class MovieController implements MovieControllerDoc {
                                 .cachePrivate()
                                 .mustRevalidate()
                         )
-                        .header("Vary", "Accept-Encoding", "Cookie")
+                        .header("Vary", "Cookie")
                         .body(response));
     }
 
@@ -50,7 +50,7 @@ public class MovieController implements MovieControllerDoc {
                                 .cachePrivate()
                                 .cachePublic()
                         )
-                        .header("Vary", "Accept-Encoding", "Cookie")
+                        .header("Vary", "Cookie")
                         .body(movie))
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
