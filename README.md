@@ -56,11 +56,11 @@ JWT_AUTH_SECRET=tu_clave_secreta
 > [Convert]::ToBase64String((1..64 | ForEach-Object {Get-Random -Maximum 256}) -as [byte[]])
 >  ```
 
-3. Asegúrate de tener Docker y Docker Compose instalados.
+3. Asegúrate de tener Docker instalado.
 
 4. Ejecuta los servicios:
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 5. Accede a la aplicación:
