@@ -79,7 +79,7 @@ docker-compose up --build
 
 > Puedes usar el fichero .env igual que en la opción 1, exportarlas en la sesión de terminal o pasarlas con tu IDE de preferencia.
 
-3. Ejecutar el backend
+2. Ejecutar el backend
 ```bash
 cd src/backend
 ./mvnw spring-boot:run
@@ -97,7 +97,7 @@ npm install
 ng serve
 ```
 
-5. Accede a la aplicación:
+4. Accede a la aplicación:
 - Frontend: http://localhost:4200
 - Backend: http://localhost:8080
 
