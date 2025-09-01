@@ -4,15 +4,13 @@
 
 ![image](https://github.com/user-attachments/assets/99427ecb-5bd2-4c92-ba72-ab43e76d52e5)
 
-*Prueba técnica para **Izertis***
-
 ![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white)
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 
 </div>
 
 ## 🧾 Resumen
-Este proyecto es una prueba técnica planteada por Izertis compuesta por un frontend en Angular v20 y un backend en Spring Boot 3.
+Este proyecto es un concepto de aplicación compuesta por un frontend en Angular v20 y un backend en Spring Boot 3.
 
 ### 🎯 Objetivo
 Desarrollar una aplicación que permita:
@@ -30,8 +28,8 @@ Desarrollar una aplicación que permita:
 ### 🔁 Opción 1: Usando Docker Compose
 1. Clona el repositorio:
 ```bash
-git clone https://github.com/ElliotLuque/izertis-tech-test.git
-cd izertis-tech-test
+git clone https://github.com/ElliotLuque/movie-searcher.git
+cd movie-searcher
 ```
 2. Crea un archivo .env en la raíz del proyecto con las siguientes variables:
 ```env
@@ -104,7 +102,7 @@ ng serve
 
 ## 📁 Estructura del Proyecto
 ```
-izertis-tech-test/
+movie-searcher/
 ├── src/                     # Carpeta raíz del código fuente
 │   ├── backend/             # Código fuente de Spring
 │   │   ├── src/main/java
