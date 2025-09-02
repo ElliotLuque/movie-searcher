@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseApiUrl: 'https://izertis-tech-test-backend.onrender.com/api/v1'
+  baseApiUrl: 'https://movie-searcher-backend.onrender.com/api/v1'
 };
