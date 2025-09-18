@@ -122,7 +122,7 @@ Funciona como un proxy entre el frontend y los servicios públicos de películas
 ### ✨ Características principales
 - API RESTful reactiva para búsqueda y detalle de películas
 - Autenticación con JWT usando cookies seguras (HttpOnly)
-- Documentación completa con [SwaggerUI](https://izertis-tech-test-backend.onrender.com/docs) (OpenAPI)
+- Documentación completa con [SwaggerUI](https://movie-searcher-backend.onrender.com/docs) (OpenAPI)
 - Integración con OMDb y TMDb a través de Spring WebClient
 - Configuración de CORS para habilitar peticiones desde frontend web
 - Caché server-side con Caffeine y client-side con HTTP headers
@@ -154,8 +154,8 @@ La aplicación se ha desplegado en [Render.com](https://render.com) con el tier 
 - Añadir variables de entorno desde el panel de configuración de Render
 
 ### 📎 Enlaces
-- [Backend](https://izertis-tech-test-backend.onrender.com/)
-- [Frontend](https://izertis-tech-test-frontend.onrender.com/)
+- [Backend](https://movie-searcher-backend.onrender.com/)
+- [Frontend](https://movie-searcher-frontend.onrender.com/)
 
 ## 📧 Contacto
 - **Autor**: Elliot Luque Pascual
