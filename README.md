@@ -69,7 +69,7 @@ docker compose up --build
 ### 🧩 Opción 2: Sin Docker Compose (modo manual)
 
 > [!WARNING]
-> Necesitas tener instalado:
+> Necesitas tener instalado o poder ejecutar en tu máquina:
 > - Java 21
 > - Node.js 20
 
