@@ -159,4 +159,4 @@ La aplicación se ha desplegado en [Render.com](https://render.com) con el tier 
 
 ## 📧 Contacto
 - **Autor**: Elliot Luque Pascual
-- **Email**: elliotluque@gmail.com
+- **Email**: [contact@elliotluque.com](mailto:contact@elliotluque.com)
